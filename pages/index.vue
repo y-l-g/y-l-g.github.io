@@ -19,7 +19,7 @@ const mode = useColorMode()
             <p><strong>Stack :</strong></p>
             <ul>
                 <li>Backend : Laravel + Filament</li>
-                <li>Front-End : Vue + Inertia</li>
+                <li>Frontend : Vue + Inertia</li>
                 <li>Server : Docker + FrankenPHP</li>
                 <li>Hosting : Hetzner</li>
             </ul>
