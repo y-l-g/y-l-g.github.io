@@ -6,8 +6,8 @@ const mode = useColorMode()
 <template>
     <div>
         <button class="absolute right-10 top-10" @click="mode = mode === 'dark' ? 'light' : 'dark'">
-            <Icon v-if="mode === 'dark'" name="uil:sun" size="20" />
-            <Icon v-else name="uil:moon" size="20" />
+            <UIcon v-if="mode === 'dark'" name="uil:sun" size="20" />
+            <UIcon v-else name="uil:moon" size="20" />
         </button>
         <div class="mb-10">
             <p><strong>Youenn LE GOUEDEC</strong></p>
@@ -38,7 +38,7 @@ const mode = useColorMode()
             </ul>
         </div>
         <a href="https://github.com/y-l-g">
-            <Icon name="uil:github" size="20" />
+            <UIcon name="uil:github" size="20" />
         </a>
     </div>
 </template>
