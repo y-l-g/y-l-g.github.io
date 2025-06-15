@@ -2,9 +2,11 @@
 import * as locales from '@nuxt/ui/locale'
 import type { DropdownMenuItem } from '@nuxt/ui';
 import { useColorMode } from '@vueuse/core'
+
 const { locale } = useI18n()
 const mode = useColorMode()
 const switchLocalePath = useSwitchLocalePath()
+
 const items = ref<DropdownMenuItem[]>([
   [
     {
@@ -22,20 +24,32 @@ const items = ref<DropdownMenuItem[]>([
 <template>
   <UApp :locale="locales[locale]">
     <div class="relative min-h-screen">
-      <div class="absolute top-0 right-0 z-50 p-4 flex gap-2">
-        <UButton v-if="mode === 'dark'" icon="i-uil-sun" color="neutral" variant="ghost" size="lg"
-          @click="mode = 'light'" />
-        <UButton v-else icon="i-uil-moon" color="neutral" variant="ghost" size="lg" @click="mode = 'dark'" />
+      <header
+        class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
+        <div class="flex items-center justify-between px-4 py-3">
+          <div class="flex gap-2 items-center">
+            <NuxtLink :to="$localePath('index')">
+              <UButton icon="i-lucide-home" variant="ghost" size="lg" color="neutral" />
+            </NuxtLink>
+            <NuxtLink :to="$localePath('blog')">
+              Blog
+            </NuxtLink>
+          </div>
 
-        <UDropdownMenu :items="items" :content="{
-          align: 'start',
-        }">
-          <UButton icon="i-lucide-languages" color="neutral" variant="ghost" size="lg" />
-        </UDropdownMenu>
-      </div>
-      <div class="mx-auto flex flex-col items-center py-20 px-2 pt-16">
+          <div class="flex items-center gap-2">
+            <UButton :icon="mode === 'dark' ? 'i-uil-sun' : 'i-uil-moon'" color="neutral" variant="ghost" size="lg"
+              @click="mode = mode === 'dark' ? 'light' : 'dark'" />
+
+            <UDropdownMenu :items="items" :content="{ align: 'end' }">
+              <UButton icon="i-lucide-languages" color="neutral" variant="ghost" size="lg" />
+            </UDropdownMenu>
+          </div>
+        </div>
+      </header>
+
+      <main class="w-full flex justify-center py-16 px-6">
         <NuxtPage />
-      </div>
+      </main>
     </div>
   </UApp>
 </template>

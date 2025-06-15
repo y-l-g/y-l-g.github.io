@@ -46,5 +46,4 @@
             <UIcon name="uil:github" size="20" />
         </a>
     </div>
-
 </template>
