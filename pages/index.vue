@@ -20,22 +20,25 @@ const items = ref<DropdownMenuItem[]>([
 <template>
     <div>
 
-        <button @click="mode = mode === 'dark' ? 'light' : 'dark'">
-            <UButton v-if="mode === 'dark'" icon="uil-sun" color="neutral" variant="ghost" size="lg" />
-            <UButton v-else icon="uil-moon" color="neutral" variant="ghost" size="lg" />
-        </button>
+        <div class="mb-5">
+            <button @click="mode = mode === 'dark' ? 'light' : 'dark'">
+                <UButton v-if="mode === 'dark'" icon="uil-sun" color="neutral" variant="ghost" size="lg" />
+                <UButton v-else icon="uil-moon" color="neutral" variant="ghost" size="lg" />
+            </button>
 
-        <UDropdownMenu :items="items">
-            <UButton icon="i-lucide-languages" color="neutral" variant="ghost" />
-        </UDropdownMenu>
+            <UDropdownMenu :items="items">
+                <UButton icon="i-lucide-languages" color="neutral" variant="ghost" />
+            </UDropdownMenu>
+        </div>
 
-        <div class="mb-10">
+        <div class="mb-5">
             <p><strong>Youenn LE GOUEDEC</strong></p>
             <p>Freelance</p>
             <p>Full Stack</p>
         </div>
-        <img src="/img/photo.jpg" alt="Picture of Me" class="max-w-40 sm:max-w-50 rounded-full mb-10" />
-        <div class="mb-10">
+
+        <img src="/img/photo.jpg" alt="Picture of Me" class="max-w-40 sm:max-w-50 rounded-full mb-5" />
+        <div class="mb-5">
             <p><strong>Stack :</strong></p>
             <ul>
                 <li>Backend : Laravel + Filament</li>
@@ -45,13 +48,13 @@ const items = ref<DropdownMenuItem[]>([
             </ul>
         </div>
 
-        <div class="mb-10">
+        <div class="mb-5">
             <p><strong>Projects :</strong></p>
             <ul>
                 <li><a href="https://notenn.com">notenn.com</a></li>
             </ul>
         </div>
-        <div class="mb-10">
+        <div class="mb-5">
             <p><strong>Contact :</strong></p>
             <ul>
                 <li>youenn@legouedec.fr</li>
@@ -60,9 +63,6 @@ const items = ref<DropdownMenuItem[]>([
         <a href="https://github.com/y-l-g">
             <UIcon name="uil:github" size="20" />
         </a>
-        <div>
-            <h1>{{ $t('welcome') }}</h1>
-        </div>
     </div>
 
 </template>
