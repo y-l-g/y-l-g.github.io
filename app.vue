@@ -3,19 +3,17 @@ import * as locales from '@nuxt/ui/locale'
 import type { DropdownMenuItem } from '@nuxt/ui';
 import { useColorMode } from '@vueuse/core'
 
-const { locale } = useI18n()
+const { locale, setLocale } = useI18n()
 const mode = useColorMode()
 const switchLocalePath = useSwitchLocalePath()
 
 const items = ref<DropdownMenuItem[]>([
   [
     {
-      label: 'Français',
-      to: switchLocalePath('fr'),
+      slot: 'fr' as const
     },
     {
-      label: 'English',
-      to: switchLocalePath('en'),
+      slot: 'en' as const
     },
   ],
 ])
@@ -42,6 +40,12 @@ const items = ref<DropdownMenuItem[]>([
 
             <UDropdownMenu :items="items" :content="{ align: 'end' }">
               <UButton icon="i-lucide-languages" color="neutral" variant="ghost" size="lg" />
+              <template #fr>
+                <UButton label="Français" color="neutral" variant="ghost" @click="setLocale('fr')" />
+              </template>
+              <template #en>
+                <UButton label="English" color="neutral" variant="ghost" @click="setLocale('en')" />
+              </template>
             </UDropdownMenu>
           </div>
         </div>
