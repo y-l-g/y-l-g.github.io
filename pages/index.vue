@@ -22,8 +22,8 @@ const items = ref<DropdownMenuItem[]>([
 
         <div class="mb-5">
             <button @click="mode = mode === 'dark' ? 'light' : 'dark'">
-                <UButton v-if="mode === 'dark'" icon="uil-sun" color="neutral" variant="ghost" size="lg" />
-                <UButton v-else icon="uil-moon" color="neutral" variant="ghost" size="lg" />
+                <UButton v-if="mode === 'dark'" icon="i-lucide-sun" color="neutral" variant="ghost" size="lg" />
+                <UButton v-else icon="i-lucide-moon" color="neutral" variant="ghost" size="lg" />
             </button>
 
             <UDropdownMenu :items="items">
