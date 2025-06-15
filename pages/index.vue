@@ -12,18 +12,18 @@
 
         <NuxtImg src="/img/photo.jpg" alt="Picture of Me" class="max-w-40 sm:max-w-50 rounded-full" />
         <div>
-            <p><strong>Stack :</strong></p>
+            <p><strong>Stack</strong></p>
             <ul>
                 <li>Backend : Laravel + Filament</li>
                 <li>Frontend : Vue + Inertia</li>
-                <li>Infrastructure : Docker + FrankenPHP + Caddy</li>
+                <li>Environment : Linux + Docker + Caddy</li>
                 <li>Hosting : Hetzner</li>
 
             </ul>
         </div>
 
         <div>
-            <p><strong>About me :</strong></p>
+            <p><strong>About me</strong></p>
             <ul>
                 <li>Location : Britanny, France</li>
                 <li>Pronouns : He / Him</li>
@@ -31,13 +31,13 @@
             </ul>
         </div>
         <div>
-            <p><strong>Projects :</strong></p>
+            <p><strong>Projects</strong></p>
             <ul>
                 <li><a href="https://notenn.com">notenn.com</a></li>
             </ul>
         </div>
         <div>
-            <p><strong>Contact :</strong></p>
+            <p><strong>Contact</strong></p>
             <ul>
                 <li>youenn@legouedec.fr</li>
             </ul>
