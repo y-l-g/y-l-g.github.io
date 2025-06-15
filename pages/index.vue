@@ -22,8 +22,8 @@ const items = ref<DropdownMenuItem[]>([
 
         <div class="mb-5">
             <button @click="mode = mode === 'dark' ? 'light' : 'dark'">
-                <UButton v-if="mode === 'dark'" icon="i-lucide-sun" color="neutral" variant="ghost" size="lg" />
-                <UButton v-else icon="i-lucide-moon" color="neutral" variant="ghost" size="lg" />
+                <UButton v-if="mode === 'dark'" icon="uil-sun" color="neutral" variant="ghost" size="lg" />
+                <UButton v-else icon="uil-moon" color="neutral" variant="ghost" size="lg" />
             </button>
 
             <UDropdownMenu :items="items">
@@ -43,11 +43,20 @@ const items = ref<DropdownMenuItem[]>([
             <ul>
                 <li>Backend : Laravel + Filament</li>
                 <li>Frontend : Vue + Inertia</li>
-                <li>Infrastructure : Docker + FrankenPHP + Caddy Server</li>
+                <li>Infrastructure : Docker + FrankenPHP + Caddy</li>
                 <li>Hosting : Hetzner</li>
+
             </ul>
         </div>
 
+        <div class="mb-5">
+            <p><strong>About me :</strong></p>
+            <ul>
+                <li>Location : Britanny, France</li>
+                <li>Pronouns : He / Him</li>
+                <li>Hobbies : Dancing / Playing African Drums & Accordion </li>
+            </ul>
+        </div>
         <div class="mb-5">
             <p><strong>Projects :</strong></p>
             <ul>
