@@ -16,6 +16,13 @@ const items = ref<DropdownMenuItem[]>([
     },
   ],
 ])
+
+onMounted(() => {
+  console.log(mode.value)
+})
+watch(mode, () => {
+  console.log(mode.value)
+})
 </script>
 
 <template>
