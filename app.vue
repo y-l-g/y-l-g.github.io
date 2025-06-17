@@ -5,7 +5,6 @@ import { useColorMode } from '@vueuse/core'
 
 const { locale, setLocale } = useI18n()
 const mode = useColorMode()
-const switchLocalePath = useSwitchLocalePath()
 
 const items = ref<DropdownMenuItem[]>([
   [
@@ -21,7 +20,7 @@ const items = ref<DropdownMenuItem[]>([
 
 <template>
   <UApp :locale="locales[locale]">
-    <div class="relative min-h-screen">
+    <div class="relative min-h-screen text-toned">
       <header
         class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
         <div class="flex items-center justify-between px-4 py-3">
@@ -51,7 +50,7 @@ const items = ref<DropdownMenuItem[]>([
         </div>
       </header>
 
-      <main class="w-full flex justify-center py-16 px-6">
+      <main class="flex-1 mx-auto px-4 py-16 max-w-4xl">
         <NuxtPage />
       </main>
     </div>

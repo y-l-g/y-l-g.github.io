@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="flex flex-col gap-10">
+    <div class="space-y-10">
         <div>
             <p><strong>Youenn LE GOUEDEC</strong></p>
             <p>Freelance</p>
