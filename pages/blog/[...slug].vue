@@ -12,14 +12,14 @@ const { data: post } = await useAsyncData(route.path, () => {
             <article>
                 <header class="mb-8">
                     <h1 class="text-4xl font-bold">{{ post.title }}</h1>
-                    <p v-if="post.description" class="text-gray-600 mt-2">{{ post.description }}</p>
+                    <p v-if="post.description" class="mt-2 font-medium">{{ post.description }}</p>
                 </header>
 
                 <ContentRenderer :value="post" class="prose max-w-none" />
 
                 <div class="mt-8">
-                    <NuxtLink :to="$localePath('/blog')" class="text-blue-600 hover:underline">
-                        ← Retour au blog
+                    <NuxtLink :to="$localePath('/blog')">
+                        ← {{ $t('Return to blog') }}
                     </NuxtLink>
                 </div>
             </article>
@@ -27,9 +27,9 @@ const { data: post } = await useAsyncData(route.path, () => {
 
         <template v-else>
             <div class="empty-page text-center py-20">
-                <h1 class="text-4xl font-bold mb-4">Post non trouvé</h1>
-                <NuxtLink :to="$localePath('/blog')" class="text-blue-600 hover:underline">
-                    ← Retour au blog
+                <h1 class="text-4xl font-bold mb-4">{{ $t('Post not found') }}</h1>
+                <NuxtLink :to="$localePath('/blog')">
+                    ← {{ $t('Return to blog') }}
                 </NuxtLink>
             </div>
         </template>
