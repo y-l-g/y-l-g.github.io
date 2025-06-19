@@ -5,6 +5,7 @@ import { useColorMode } from '@vueuse/core'
 
 const { locale, setLocale } = useI18n()
 const mode = useColorMode()
+const modeIcon = computed(() => mode.value === 'dark' ? 'i-uil-sun' : 'i-uil-moon')
 
 const items = ref<DropdownMenuItem[]>([
   [
@@ -16,13 +17,6 @@ const items = ref<DropdownMenuItem[]>([
     },
   ],
 ])
-
-onMounted(() => {
-  console.log(mode.value)
-})
-watch(mode, () => {
-  console.log(mode.value)
-})
 </script>
 
 <template>
@@ -41,7 +35,7 @@ watch(mode, () => {
           </div>
 
           <div class="flex items-center gap-2">
-            <UButton :icon="mode === 'dark' ? 'i-uil-sun' : 'i-uil-moon'" color="neutral" variant="ghost" size="lg"
+            <UButton :icon="modeIcon" color="neutral" variant="ghost" size="lg"
               @click="mode = mode === 'dark' ? 'light' : 'dark'" />
 
             <UDropdownMenu :items="items" :content="{ align: 'end' }">
