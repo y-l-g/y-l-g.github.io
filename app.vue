@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import * as locales from '@nuxt/ui/locale'
 import type { DropdownMenuItem } from '@nuxt/ui';
-import { useColorMode } from '@vueuse/core'
 
 const { locale, setLocale } = useI18n()
-const mode = useColorMode()
-const modeIcon = computed(() => mode.value === 'dark' ? 'i-uil-sun' : 'i-uil-moon')
+const colorMode = useColorMode()
+
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set(_isDark) {
+    colorMode.preference = _isDark ? 'dark' : 'light'
+  }
+})
 
 const items = ref<DropdownMenuItem[]>([
   [
@@ -35,8 +42,8 @@ const items = ref<DropdownMenuItem[]>([
           </div>
 
           <div class="flex items-center gap-2">
-            <UButton :icon="modeIcon" color="neutral" variant="ghost" size="lg"
-              @click="mode = mode === 'dark' ? 'light' : 'dark'" />
+            <UButton :icon="isDark ? 'i-uil-sun' : 'i-uil-moon'" color="neutral" variant="ghost" size="lg"
+              @click="isDark = !isDark" />
 
             <UDropdownMenu :items="items" :content="{ align: 'end' }">
               <UButton icon="i-lucide-languages" color="neutral" variant="ghost" size="lg" />
