@@ -4,7 +4,7 @@ description: "Technologies used"
 date: "2025-06-19"
 ---
 
-**Development** : Nuxt 3  
+**Frontend** : Nuxt 3  
 **Hosting** : GitHub Pages  
 **Dark Mode** : Nuxt Color Mode  
 **Blog** : Nuxt Content  
