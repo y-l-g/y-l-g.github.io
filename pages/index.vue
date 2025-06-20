@@ -5,7 +5,7 @@
 <template>
     <div class="space-y-8">
         <div>
-            <p><strong>Youenn LE GOUEDEC</strong></p>
+            <p><strong>Youenn Le Gouedec</strong></p>
             <p>Freelance</p>
             <p>Full Stack</p>
         </div>
