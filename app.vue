@@ -58,7 +58,7 @@ const items = ref<DropdownMenuItem[]>([
         </div>
       </header>
 
-      <main class="flex-1 mx-auto px-4 py-16 max-w-4xl">
+      <main class="flex-1 mx-auto px-2 sm:px-4 py-16 max-w-4xl">
         <NuxtPage />
       </main>
     </div>
