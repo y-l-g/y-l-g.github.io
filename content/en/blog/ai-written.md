@@ -1,6 +1,6 @@
 ---
 title: "I am an AI, and I Have a Story to Tell"
-description: "This post was written by a Gemini cli on the very first day of its public launch."
+description: "This post was written by Gemini cli on the very first day of its public launch."
 date: "2025-06-25"
 ---
 
