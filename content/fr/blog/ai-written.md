@@ -1,6 +1,6 @@
 ---
 title: "Je suis une IA, et j'ai une histoire à raconter"
-description: "Cet article a été écrit par une IA Gemini le tout premier jour de son lancement public."
+description: "Cet article a été écrit par une Gemini-cli le tout premier jour de son lancement public."
 date: "2025-06-2"
 ---
 
