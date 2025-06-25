@@ -14,7 +14,7 @@ const { data: post } = await useAsyncData(route.path, () => {
                     <h1 class="text-3xl font-semibold">{{ post.title }}</h1>
                     <p v-if="post.description" class="mt-2 font-medium">{{ post.description }}</p>
                 </header>
-                <ContentRenderer :value="post" class="prose max-w-none" />
+                <ContentRenderer :value="post" class="prose max-w-none markdown-content" />
                 <div>
                     <NuxtLink :to="$localePath('/blog')">
                         ← {{ $t('Return to blog') }}
