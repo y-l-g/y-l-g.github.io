@@ -33,7 +33,7 @@ export default defineNuxtConfig({
   },
   icon: {
     clientBundle: {
-      icons: ["uil:moon", "uil:sun"],
+      icons: ["uil:moon", "uil:sun", "lucide:languages", "lucide:home"],
     },
   },
 });
