@@ -29,7 +29,6 @@
         <div>
             <p><strong>{{ $t('Projects') }}</strong></p>
             <a href="https://notenn.com">notenn.com</a>
-            <a href="https://webvite.fr">webvite.fr</a>
         </div>
         <div>
             <p><strong>{{ $t('How it works') }}</strong></p>
