@@ -31,9 +31,9 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  icon: {
-    clientBundle: {
-      icons: ["uil:moon", "uil:sun"],
-    },
-  },
+  // icon: {
+  //   clientBundle: {
+  //     icons: ["uil:moon", "uil:sun"],
+  //   },
+  // },
 });
