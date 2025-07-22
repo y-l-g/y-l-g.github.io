@@ -10,8 +10,7 @@
             <p>Full Stack</p>
         </div>
 
-        <NuxtImg src="/img/photo.jpg" alt="Picture of Me"
-            class="max-w-40 sm:max-w-50 rounded-full dark:brightness-80" />
+        <img src="/img/photo.jpg" alt="Picture of Me" class="max-w-40 sm:max-w-50 rounded-full dark:brightness-80" />
         <div>
             <p><strong>Stack</strong></p>
             <p>Backend : Laravel + Filament</p>
@@ -29,6 +28,7 @@
         <div>
             <p><strong>{{ $t('Projects') }}</strong></p>
             <a href="https://notenn.com">notenn.com</a>
+            <a href="https://webvite.fr">webvite.fr</a>
         </div>
         <div>
             <p><strong>{{ $t('How it works') }}</strong></p>
