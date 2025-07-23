@@ -44,7 +44,6 @@ const items = ref<DropdownMenuItem[]>([
           <div class="flex items-center gap-2">
             <UButton :icon="isDark ? 'i-uil-sun' : 'i-uil-moon'" color="neutral" variant="ghost" size="lg"
               @click="isDark = !isDark" />
-
             <UDropdownMenu :items="items" :content="{ align: 'end' }">
               <UButton icon="i-lucide-languages" color="neutral" variant="ghost" size="lg" />
               <template #fr>
