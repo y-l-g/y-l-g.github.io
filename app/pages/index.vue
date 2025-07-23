@@ -29,8 +29,8 @@ import { NuxtImg } from '#components';
         </div>
         <div>
             <p><strong>{{ $t('Projects') }}</strong></p>
-            <a href="https://notenn.com">notenn.com</a>
-            <a href="https://webvite.fr">webvite.fr</a>
+            <p><a href="https://notenn.com">notenn.com</a></p>
+            <p><a href="https://webvite.fr">webvite.fr</a></p>
         </div>
         <div>
             <p><strong>{{ $t('How it works') }}</strong></p>
