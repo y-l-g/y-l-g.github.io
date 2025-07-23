@@ -32,13 +32,13 @@ import { NuxtImg } from '#components';
             <p><a href="https://notenn.com">notenn.com</a></p>
             <p><a href="https://webvite.fr">webvite.fr</a></p>
         </div>
-        <div>
+        <!-- <div>
             <p><strong>{{ $t('How it works') }}</strong></p>
             <p>1. {{ $t('You email me with your needs, ideas, or project details') }}</p>
             <p>2. {{ $t('I’ll get back to you to discuss your requirements') }}</p>
             <p>3. {{ $t('Work begins at no cost – I start developing your solution') }}</p>
             <p>4. {{ $t('Only pay when satisfied – We agree on project pricing together') }}</p>
-        </div>
+        </div> -->
         <div>
             <p><strong>{{ $t('Contact') }}</strong></p>
             <ul>
