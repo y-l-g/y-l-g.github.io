@@ -10,7 +10,7 @@
             <p>Full Stack</p>
         </div>
 
-        <img src="/img/photo.jpg" alt="Picture of Me" class="max-w-40 sm:max-w-50 rounded-full dark:brightness-80" />
+        <NuxtImg src="/photo.jpg" alt="Picture of Me" class="max-w-40 sm:max-w-50 rounded-full dark:brightness-80" />
         <div>
             <p><strong>Stack</strong></p>
             <p>Backend : Laravel + Filament</p>

@@ -16,16 +16,8 @@ export default defineNuxtConfig({
     strategy: "prefix",
     defaultLocale: "en",
     locales: [
-      {
-        code: "en",
-        name: "English",
-        file: "en.json",
-      },
-      {
-        code: "fr",
-        name: "Français",
-        file: "fr.json",
-      },
+      { code: "en", name: "English", file: "en.json" },
+      { code: "fr", name: "French", file: "fr.json" },
     ],
   },
   vite: {
@@ -33,7 +25,13 @@ export default defineNuxtConfig({
   },
   icon: {
     clientBundle: {
-      icons: ["uil:moon", "uil:sun", "lucide:languages", "lucide:home"],
+      icons: [
+        "uil:moon",
+        "uil:sun",
+        "lucide:languages",
+        "lucide:home",
+        "uil:github",
+      ],
     },
   },
 });
