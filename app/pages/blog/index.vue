@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { locale } = useI18n()
 
-const { data: posts } = await useAsyncData('blog', () =>
+const { data: posts } = await useAsyncData(`blog-${locale.value}`, () =>
     queryCollection('content')
         .where('path', 'LIKE', `/${locale.value}/blog%`)
         .order('date', 'DESC')
