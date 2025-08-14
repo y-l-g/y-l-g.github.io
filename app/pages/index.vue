@@ -24,8 +24,6 @@ import { NuxtImg } from '#components';
         <div>
             <p><strong>{{ $t('About me') }}</strong></p>
             <p>{{ $t('Location : Britanny, France') }} </p>
-            <p>{{ $t('Location : He / Him') }} </p>
-            <p>{{ $t('Hobbies : Dancing / African Drums & Accordion / Gardenning') }} </p>
         </div>
         <div>
             <p><strong>{{ $t('Projects') }}</strong></p>
