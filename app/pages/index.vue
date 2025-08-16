@@ -30,13 +30,6 @@ import { NuxtImg } from '#components';
             <p><a href="https://notenn.com">notenn.com</a></p>
             <p><a href="https://webvite.fr">webvite.fr</a></p>
         </div>
-        <!-- <div>
-            <p><strong>{{ $t('How it works') }}</strong></p>
-            <p>1. {{ $t('You email me with your needs, ideas, or project details') }}</p>
-            <p>2. {{ $t('I’ll get back to you to discuss your requirements') }}</p>
-            <p>3. {{ $t('Work begins at no cost – I start developing your solution') }}</p>
-            <p>4. {{ $t('Only pay when satisfied – We agree on project pricing together') }}</p>
-        </div> -->
         <div>
             <p><strong>{{ $t('Contact') }}</strong></p>
             <ul>
@@ -44,8 +37,13 @@ import { NuxtImg } from '#components';
             </ul>
         </div>
 
-        <a href="https://github.com/y-l-g">
-            <UIcon name="uil:github" size="20" />
-        </a>
+        <div class="flex gap-2">
+            <a href="https://github.com/y-l-g">
+                <UIcon name="uil:github" size="20" />
+            </a>
+            <a href="https://x.com/_y_l_g_">
+                <UIcon name="uil:twitter" size="20" />
+            </a>
+        </div>
     </div>
 </template>
