@@ -17,6 +17,7 @@
     "@nuxt/content": "^3.13.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.7.1",
+    "@takumi-rs/core": "^1.1.2",
     "@vueuse/nuxt": "^14.3.0",
     "better-sqlite3": "^12.9.0",
     "motion-v": "^2.2.1",

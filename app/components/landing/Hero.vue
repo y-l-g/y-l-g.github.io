@@ -103,17 +103,21 @@ defineProps<{
           delay: 0.5,
         }"
       >
-        <div class="flex items-center gap-2">
+        <div class="flex flex-col items-center gap-3 sm:flex-row">
           <UButton
+            color="primary"
+            size="lg"
+            icon="i-lucide-calendar"
+            :to="global.meetingLink"
+            target="_blank"
+            label="Book a call"
+          />
+
+          <UBadge
             :color="global.available ? 'success' : 'error'"
-            variant="ghost"
+            variant="soft"
+            size="lg"
             class="gap-2"
-            :to="global.available ? global.meetingLink : ''"
-            :label="
-              global.available
-                ? 'Available for new projects'
-                : 'Not available at the moment'
-            "
           >
             <template #leading>
               <span class="relative flex size-2">
@@ -129,7 +133,12 @@ defineProps<{
                 />
               </span>
             </template>
-          </UButton>
+            {{
+              global.available
+                ? "Available for new projects"
+                : "Not available at the moment"
+            }}
+          </UBadge>
         </div>
       </Motion>
 

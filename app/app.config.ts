@@ -5,7 +5,7 @@ export default defineAppConfig({
       dark: "/profile.png",
       alt: "My profile picture",
     },
-    meetingLink: "https://cal.com/",
+    meetingLink: "https://calendly.com/youenn-le-gouedec/30min",
     email: "wayeldev@gmail.com",
     available: true,
   },
