@@ -15,7 +15,7 @@ This is a minimal GitOps architecture for running several Laravel applications o
 
 The target is practical:
 
-- one VPS, around the cheap 8 EUR/month class
+- one cheap vps
 - five Laravel apps
 - HTTPS
 - Redis
@@ -118,18 +118,18 @@ The server should not be configured by hand after bootstrap. Hand changes disapp
 
 ## Tool Stack
 
-| Need | Tool |
-| --- | --- |
-| Lightweight Kubernetes | k3s |
-| GitOps deployment | Argo CD |
-| Ingress and routing | Traefik |
-| TLS certificates | cert-manager |
-| Secrets in Git | Sealed Secrets or External Secrets |
-| Database | CloudNativePG |
-| Cache and queues | Redis |
-| Laravel files | Longhorn or local persistent volumes |
-| Cluster restore | Velero |
-| Public checks | Uptime Kuma |
+| Need                   | Tool                                 |
+| ---------------------- | ------------------------------------ |
+| Lightweight Kubernetes | k3s                                  |
+| GitOps deployment      | Argo CD                              |
+| Ingress and routing    | Traefik                              |
+| TLS certificates       | cert-manager                         |
+| Secrets in Git         | Sealed Secrets or External Secrets   |
+| Database               | CloudNativePG                        |
+| Cache and queues       | Redis                                |
+| Laravel files          | Longhorn or local persistent volumes |
+| Cluster restore        | Velero                               |
+| Public checks          | Uptime Kuma                          |
 
 You can swap tools, but avoid removing the roles. A small platform still needs routing, secrets, storage, backups, and health checks.
 
@@ -294,12 +294,12 @@ Redis
 
 For cheap setups, Redis is often the least protected service. Be explicit:
 
-| Redis use | Persistence required? |
-| --- | --- |
-| cache | no |
-| disposable sessions | maybe |
-| queues | yes, unless losing jobs is acceptable |
-| Horizon metrics | no |
+| Redis use           | Persistence required?                 |
+| ------------------- | ------------------------------------- |
+| cache               | no                                    |
+| disposable sessions | maybe                                 |
+| queues              | yes, unless losing jobs is acceptable |
+| Horizon metrics     | no                                    |
 
 ## Zero-Downtime Deployments
 

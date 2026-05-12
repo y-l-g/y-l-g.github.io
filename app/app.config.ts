@@ -59,10 +59,18 @@ export default defineAppConfig({
           label: "Laravel",
           to: "https://laravel.com/",
         },
+        {
+          label: "Spatie packages",
+          to: "https://spatie.be/",
+        },
+        {
+          label: "Postgres",
+          to: "https://www.postgresql.org/",
+        },
       ],
     },
     {
-      label: "Frontent",
+      label: "Frontend",
       children: [
         {
           label: "Vue",
@@ -72,18 +80,26 @@ export default defineAppConfig({
           label: "Nuxt",
           to: "https://nuxt.com/",
         },
+        {
+          label: "Inertia.js",
+          to: "https://inertiajs.com/",
+        },
       ],
     },
     {
       label: "Infrastructure",
       children: [
         {
-          label: "Frankenphp",
+          label: "FrankenPHP",
           to: "https://frankenphp.dev/",
         },
         {
-          label: "Docker",
-          to: "https://www.docker.com/",
+          label: "K3s",
+          to: "https://k3s.io/",
+        },
+        {
+          label: "ArgoCD",
+          to: "https://argoproj.github.io/",
         },
       ],
     },
@@ -93,10 +109,6 @@ export default defineAppConfig({
         {
           label: "Go",
           to: "https://go.dev/",
-        },
-        {
-          label: "Kubernetes",
-          to: "https://kubernetes.io/",
         },
       ],
     },
