@@ -23,7 +23,8 @@ useSeoMeta({
     <UPage v-if="page">
       <LandingHero :page />
       <LandingAbout :page />
-      <LandingBlog :page />
+      <LandingProjects :page />
+      <!-- <LandingBlog :page /> -->
     </UPage>
   </UContainer>
 </template>

@@ -43,6 +43,13 @@ const createTestimonialSchema = () =>
     author: createAuthorSchema(),
   });
 
+const createProjectSchema = () =>
+  z.object({
+    title: z.string(),
+    description: z.string(),
+    links: z.array(createButtonSchema()),
+  });
+
 export default defineContentConfig({
   collections: {
     index: defineCollection({
@@ -54,6 +61,9 @@ export default defineContentConfig({
           images: z.array(createImageSchema()),
         }),
         about: createBaseSchema(),
+        projects: createBaseSchema().extend({
+          items: z.array(createProjectSchema()),
+        }),
         experience: createBaseSchema().extend({
           items: z.array(
             z.object({
