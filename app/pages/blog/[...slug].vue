@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from "@nuxt/content";
-import { mapContentNavigation } from "@nuxt/ui/utils/content";
-import { findPageBreadcrumb } from "@nuxt/content/utils";
+import {
+  defaultSeoImage,
+  jsonLdScript,
+  siteName,
+  withSiteUrl,
+} from "~/utils/seo";
 const { toc } = useAppConfig();
 
 const route = useRoute();
@@ -21,29 +24,51 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () =>
   }),
 );
 
-const navigation = inject<Ref<ContentNavigationItem[]>>("navigation", ref([]));
-const blogNavigation = computed(
-  () => navigation.value.find((item) => item.path === "/blog")?.children || [],
-);
-
-const breadcrumb = computed(() =>
-  mapContentNavigation(
-    findPageBreadcrumb(blogNavigation?.value, page.value?.path),
-  ).map(({ icon, ...link }) => link),
-);
-
 const title = page.value?.seo?.title || page.value?.title;
 const description = page.value?.seo?.description || page.value?.description;
+const canonicalUrl = withSiteUrl(route.path);
+const image = page.value.image
+  ? withSiteUrl(page.value.image)
+  : defaultSeoImage;
 
 useSeoMeta({
   title,
   description,
   ogDescription: description,
   ogTitle: title,
-  ogImage: page.value.image,
+  ogType: "article",
+  ogUrl: canonicalUrl,
+  ogImage: image,
+  twitterImage: image,
 });
 
-const articleLink = computed(() => `${window?.location}`);
+useHead({
+  link: [{ rel: "canonical", href: canonicalUrl }],
+  script: [
+    jsonLdScript({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: page.value.title,
+      description,
+      image,
+      datePublished: page.value.date,
+      dateModified: page.value.date,
+      author: {
+        "@type": "Person",
+        name: page.value.author?.name || siteName,
+        url: withSiteUrl("/"),
+      },
+      publisher: {
+        "@type": "Person",
+        name: siteName,
+        url: withSiteUrl("/"),
+      },
+      mainEntityOfPage: canonicalUrl,
+    }),
+  ],
+});
+
+const articleLink = computed(() => canonicalUrl);
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString("en-US", {
@@ -102,8 +127,7 @@ const formatDate = (dateString: string) => {
         <UContentSurround :surround />
       </UPageBody>
       <template v-if="page?.body?.toc?.links?.length" #right>
-        <UContentToc :title="toc?.title" :links="page.body?.toc?.links">
-        </UContentToc>
+        <UContentToc :title="toc?.title" :links="page.body?.toc?.links" />
       </template>
     </UPage>
   </UContainer>

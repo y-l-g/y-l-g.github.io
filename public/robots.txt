@@ -1,2 +1,3 @@
 User-Agent: *
 Disallow:
+Sitemap: https://y-l.fr/sitemap.xml

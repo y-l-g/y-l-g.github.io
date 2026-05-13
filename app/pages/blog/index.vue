@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { defaultSeoImage, withSiteUrl } from "~/utils/seo";
+
 const { data: page } = await useAsyncData("blog-page", () => {
   return queryCollection("pages").path("/blog").first();
 });
@@ -25,6 +27,14 @@ useSeoMeta({
   ogTitle: page.value?.seo?.title || page.value?.title,
   description: page.value?.seo?.description || page.value?.description,
   ogDescription: page.value?.seo?.description || page.value?.description,
+  ogType: "website",
+  ogUrl: withSiteUrl("/blog"),
+  ogImage: defaultSeoImage,
+  twitterImage: defaultSeoImage,
+});
+
+useHead({
+  link: [{ rel: "canonical", href: withSiteUrl("/blog") }],
 });
 </script>
 
@@ -32,7 +42,7 @@ useSeoMeta({
   <UContainer>
     <UPage v-if="page">
       <UPageHero :title="page.title" :description="page.description" />
-      <div class="space-y-4" v-for="(post, index) in posts">
+      <div v-for="post in posts" :key="post.path" class="space-y-4">
         <UPageCard
           class="my-4"
           :ui="{ container: 'gap-0' }"

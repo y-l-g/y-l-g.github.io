@@ -1,8 +1,8 @@
 seo:
-  title: "Youenn Le Gouedec - Fullstack Dev"
-  description: "Welcome to my portfolio! I'm Youenn, a UX/UI designer and front-end developer based in Brittany (France)."
-title: "Hey, I'm Youenn, Fullstack Dev"
-description: "As a versatile web developer, I architect robust, tailor-made applications. From back-end logic to a fluid user interface, I transform your ideas into complete and modern digital experiences. Based in Brittany(France)"
+  title: "Freelance Laravel & Vue Developer in France"
+  description: "Youenn Le Gouedec builds Laravel, Vue, Nuxt and infrastructure-heavy web applications for SaaS products and small businesses in France."
+title: "Youenn Le Gouedec, Laravel & Vue Developer"
+description: "I build robust Laravel, Vue and Nuxt applications, from back-end architecture to polished interfaces and pragmatic deployment workflows. Based in Brittany, France."
 hero:
 about:
   title: "About Me"
@@ -55,7 +55,7 @@ projects:
           color: "neutral"
           variant: "ghost"
 blog:
-  title: "Latest Articles"
+  title: "Laravel, Nuxt and Infrastructure Notes"
 faq:
   title: Frequently Asked Questions
   description: Answers to common questions about my process and services.

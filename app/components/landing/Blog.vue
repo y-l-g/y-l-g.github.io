@@ -29,7 +29,7 @@ const formatDate = (dateString: string) => {
     <div class="text-xl font-medium">
       {{ page.blog.title }}
     </div>
-    <div class="space-y-4" v-for="(post, index) in posts">
+    <div v-for="post in posts" :key="post.path" class="space-y-4">
       <UPageCard
         class="my-4"
         :ui="{ container: 'gap-0' }"
