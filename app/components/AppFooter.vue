@@ -16,18 +16,9 @@
 
     <template #right>
       <UButton
-        to="https://x.com/_y_l_g_"
-        target="_blank"
-        icon="i-simple-icons-x"
-        aria-label="YL on X"
-        color="neutral"
-        variant="ghost"
-      />
-      <UButton
-        to="https://github.com/y-l-g"
-        target="_blank"
-        icon="i-simple-icons-github"
-        aria-label="YL on GitHub"
+        v-for="link in useAppConfig().footer.links"
+        :key="link.to"
+        v-bind="link"
         color="neutral"
         variant="ghost"
       />

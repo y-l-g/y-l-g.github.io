@@ -113,6 +113,17 @@ defineProps<{
             label="Book a call"
           />
 
+          <UButton
+            color="neutral"
+            variant="outline"
+            size="xl"
+            icon="i-simple-icons-malt"
+            :to="global.maltLink"
+            target="_blank"
+            label="Malt"
+            :ui="{ leadingIcon: 'size-7' }"
+          />
+
           <UBadge
             :color="global.available ? 'success' : 'error'"
             variant="soft"

@@ -6,7 +6,8 @@ export default defineAppConfig({
       alt: "My profile picture",
     },
     meetingLink: "https://calendly.com/youenn-le-gouedec/30min",
-    email: "wayeldev@gmail.com",
+    maltLink: "https://www.malt.fr/profile/youennlegouedec",
+    email: "youenn.legouedec@gmail.com",
     available: true,
   },
   ui: {
@@ -38,6 +39,15 @@ export default defineAppConfig({
         to: "https://github.com/y-l-g",
         target: "_blank",
         "aria-label": "YL on GitHub",
+      },
+      {
+        icon: "i-simple-icons-malt",
+        to: "https://www.malt.fr/profile/youennlegouedec",
+        target: "_blank",
+        "aria-label": "YL on Malt",
+        ui: {
+          leadingIcon: "size-6",
+        },
       },
     ],
   },
