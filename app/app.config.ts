@@ -46,7 +46,7 @@ export default defineAppConfig({
         target: "_blank",
         "aria-label": "YL on Malt",
         ui: {
-          leadingIcon: "size-6",
+          leadingIcon: "size-12",
         },
       },
     ],

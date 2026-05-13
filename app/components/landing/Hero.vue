@@ -113,16 +113,14 @@ defineProps<{
             label="Book a call"
           />
 
-          <UButton
+          <!-- <UButton
             color="neutral"
-            variant="outline"
-            size="xl"
+            variant="ghost"
             icon="i-simple-icons-malt"
             :to="global.maltLink"
             target="_blank"
-            label="Malt"
-            :ui="{ leadingIcon: 'size-7' }"
-          />
+            :ui="{ leadingIcon: 'size-12' }"
+          /> -->
 
           <UBadge
             :color="global.available ? 'success' : 'error'"
@@ -153,7 +151,7 @@ defineProps<{
         </div>
       </Motion>
 
-      <div class="gap-x-4 inline-flex mt-4">
+      <div class="gap-x-4 inline-flex mt-4 items-center">
         <Motion
           v-for="(link, index) of footer?.links"
           :key="index"
