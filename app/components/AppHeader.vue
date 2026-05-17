@@ -1,16 +1,31 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
 
-const items: NavigationMenuItem[] = [
+type LocaleItem = {
+  code: string;
+  name?: string;
+};
+
+const { locale, locales, t } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+
+const items = computed<NavigationMenuItem[]>(() => [
   {
-    label: "Home",
+    label: t("nav.home"),
     to: "/",
   },
   {
-    label: "Blog",
+    label: t("nav.blog"),
     to: "/blog",
   },
-];
+]);
+
+const availableLocales = computed(() =>
+  (locales.value as LocaleItem[]).filter((item) => item.code !== locale.value),
+);
+
+const getSwitchLocalePath = (code: string) =>
+  switchLocalePath(code as "fr" | "en");
 </script>
 <template>
   <div
@@ -27,6 +42,18 @@ const items: NavigationMenuItem[] = [
       }"
     >
       <template #list-trailing>
+        <UButton
+          v-for="item in availableLocales"
+          :key="item.code"
+          :to="getSwitchLocalePath(item.code)"
+          :locale="false"
+          color="neutral"
+          variant="ghost"
+          size="sm"
+          icon="i-lucide-languages"
+          :label="item.code.toUpperCase()"
+          :aria-label="t('nav.language', { name: item.name })"
+        />
         <UColorModeButton />
       </template>
     </UNavigationMenu>

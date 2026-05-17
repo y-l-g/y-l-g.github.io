@@ -54,7 +54,7 @@ export default defineContentConfig({
   collections: {
     index: defineCollection({
       type: "page",
-      source: "index.yml",
+      source: [{ include: "index.yml" }, { include: "en/index.yml" }],
       schema: z.object({
         hero: z.object({
           links: z.array(createButtonSchema()),
@@ -97,7 +97,7 @@ export default defineContentConfig({
     }),
     blog: defineCollection({
       type: "page",
-      source: "blog/*.md",
+      source: [{ include: "blog/*.md" }, { include: "en/blog/*.md" }],
       schema: z.object({
         minRead: z.number(),
         date: z.date(),
@@ -107,7 +107,7 @@ export default defineContentConfig({
     }),
     pages: defineCollection({
       type: "page",
-      source: [{ include: "blog.yml" }],
+      source: [{ include: "blog.yml" }, { include: "en/blog.yml" }],
       schema: z.object({
         links: z.array(createButtonSchema()),
       }),

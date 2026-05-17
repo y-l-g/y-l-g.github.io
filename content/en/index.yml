@@ -1,0 +1,95 @@
+seo:
+  title: "Freelance Laravel & Vue Developer in France"
+  description: "Youenn Le Gouedec builds Laravel, Vue, Nuxt and infrastructure-heavy web applications for SaaS products and small businesses in France."
+title: "Youenn Le Gouedec, Laravel & Vue Developer"
+description: "I build robust Laravel, Vue and Nuxt applications, from back-end architecture to polished interfaces and pragmatic deployment workflows. Based in Brittany, France."
+hero:
+about:
+  title: "About Me"
+  description: |
+    Since embarking on my self-taught development journey in 2024, I've primarily focused on Laravel and Vue. My toolkit also includes hands-on experience with Symfony and Docker, alongside explorations into Django. I thrive on experimenting with new technologies, contributing to open-source projects, and crafting elegant applications that deliver tangible value.
+projects:
+  title: "Projects"
+  description: "A few things I build and maintain."
+  items:
+    - title: "Notenn"
+      description: "A side project for musicians to organize, edit, render, and share scores written in ABC notation."
+      links:
+        - label: "Visit"
+          icon: "i-lucide-external-link"
+          to: "https://notenn.com"
+          target: "_blank"
+          color: "neutral"
+          variant: "ghost"
+    - title: "Webvite"
+      description: "A production SaaS for small businesses, with subscriptions, company websites, and real paying users."
+      links:
+        - label: "Visit"
+          icon: "i-lucide-external-link"
+          to: "https://webvite.eu"
+          target: "_blank"
+          color: "neutral"
+          variant: "ghost"
+    - title: "Saasterkit"
+      description: "An open-source Laravel, Vue, and Inertia SaaS starter kit with auth, teams, billing, and admin features."
+      links:
+        - label: "Visit"
+          icon: "i-lucide-external-link"
+          to: "https://saasterkit.com"
+          target: "_blank"
+          color: "neutral"
+          variant: "ghost"
+        - label: "Source"
+          icon: "i-simple-icons-github"
+          to: "https://github.com/y-l-g/saasterkit"
+          target: "_blank"
+          color: "neutral"
+          variant: "ghost"
+    - title: "FrankenPHP WebSocket"
+      description: "An experimental Pusher-compatible WebSocket module for high-performance real-time broadcasting in PHP."
+      links:
+        - label: "Source"
+          icon: "i-simple-icons-github"
+          to: "https://github.com/y-l-g/websocket"
+          target: "_blank"
+          color: "neutral"
+          variant: "ghost"
+blog:
+  title: "Laravel, Nuxt and Infrastructure Notes"
+faq:
+  title: Frequently Asked Questions
+  description: Answers to common questions about my process and services.
+  categories:
+    - title: Services & Process
+      questions:
+        - label: What services do you offer?
+          content: |
+            I build web applications with Laravel, Vue and Nuxt. This includes back-end architecture, front-end interfaces, SaaS integrations, deployment systems and improving existing products.
+        - label: What is your process like?
+          content: |
+            I prefer a pragmatic and iterative process: understand the need, define the scope, ship in small steps, test what matters and keep communication clear during implementation.
+        - label: Do you work with startups?
+          content: |
+            Yes. I enjoy helping small teams move quickly without sacrificing technical quality, maintainability or product clarity.
+    - title: Pricing & Timelines
+      questions:
+        - label: How much does a project typically cost?
+          content: |
+            Project costs depend on scope, complexity, integrations and timeline. After an initial conversation, I suggest a structure that fits the actual need rather than a generic package.
+        - label: What are your payment terms?
+          content: |
+            Payment terms are defined at the start of the project depending on the engagement format: short mission, fixed-scope development, ongoing support or product reinforcement.
+        - label: How long does a typical project take?
+          content: |
+            It depends heavily on the scope. A targeted improvement can take a few days, while a larger product can take several weeks or months.
+        - label: Do you offer retainers or ongoing support?
+          content: |
+            Yes. I can help with maintenance, product improvements, architecture, code review or new features.
+    - title: About Me
+      questions:
+        - label: What do you enjoy most about your work?
+          content: |
+            I like turning technical and product constraints into applications that are simple to use, robust and genuinely useful.
+        - label: What are your hobbies outside of work?
+          content: |
+            I am interested in open-source projects, developer tooling, lightweight infrastructure and well-built digital products.

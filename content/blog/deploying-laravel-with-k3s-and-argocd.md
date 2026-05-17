@@ -1,6 +1,6 @@
 ---
-title: "A Minimal GitOps Architecture for Laravel on k3s"
-description: "A compact architecture for running several Laravel applications on one small VPS with k3s, Argo CD, Redis, Postgres, backups, uptime checks, and fast disaster recovery."
+title: "Une architecture GitOps minimale pour Laravel sur k3s"
+description: "Une architecture compacte pour exécuter plusieurs applications Laravel sur un petit VPS avec k3s, Argo CD, Redis, Postgres, sauvegardes, supervision et reprise rapide après incident."
 date: 2026-05-11
 minRead: 9
 image: https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
@@ -11,21 +11,21 @@ author:
     alt: "YL"
 ---
 
-This is a minimal GitOps architecture for running several Laravel applications on a small VPS.
+Voici une architecture GitOps minimale pour exécuter plusieurs applications Laravel sur un petit VPS.
 
-The target is practical:
+L’objectif est pratique :
 
-- one cheap vps
-- five Laravel apps
+- un VPS peu coûteux
+- cinq applications Laravel
 - HTTPS
 - Redis
 - Postgres
-- file and database backups
-- uptime monitoring
-- rolling deployments
-- disaster recovery in less than 30 minutes
+- sauvegardes des fichiers et des bases de données
+- supervision de disponibilité
+- déploiements progressifs
+- reprise après incident en moins de 30 minutes
 
-This is not high availability. It is a low-cost, reproducible setup where the recovery story is stronger than the server.
+Ce n’est pas de la haute disponibilité. C’est une configuration peu coûteuse et reproductible, où la stratégie de reprise est plus solide que le serveur lui-même.
 
 ## Architecture
 
@@ -43,9 +43,9 @@ This is not high availability. It is a low-cost, reproducible setup where the re
           Laravel A           Laravel B           Laravel C...
               |                   |                   |
       +-------+-------+   +-------+-------+   +-------+-------+
-      | web replicas  |   | web replicas  |   | web replicas  |
-      | queue worker  |   | queue worker  |   | queue worker  |
-      | scheduler job |   | scheduler job |   | scheduler job |
+      | réplicas web  |   | réplicas web  |   | réplicas web  |
+      | worker queue  |   | worker queue  |   | worker queue  |
+      | tâche cron    |   | tâche cron    |   | tâche cron    |
       +-------+-------+   +-------+-------+   +-------+-------+
               |                   |                   |
               +----------+--------+--------+----------+
@@ -56,25 +56,25 @@ This is not high availability. It is a low-cost, reproducible setup where the re
                     +---------+       +----------+
                                            |
                                            v
-                                    S3-compatible backups
+                                  sauvegardes compatibles S3
 ```
 
-The cluster is small enough to reason about:
+Le cluster reste assez petit pour être compris rapidement :
 
 ```text
 system
   Argo CD
   cert-manager
-  sealed or external secrets
-  storage
-  backup controller
+  secrets scellés ou externes
+  stockage
+  contrôleur de sauvegarde
 
 data
   Postgres
   Redis
 
 monitoring
-  uptime checks
+  contrôles de disponibilité
 
 apps
   app-a
@@ -84,88 +84,88 @@ apps
   app-e
 ```
 
-The rule is simple: shared infrastructure goes in shared namespaces, applications get their own namespaces, and everything important is recreated from Git.
+La règle est simple : l’infrastructure partagée va dans des namespaces partagés, les applications ont leurs propres namespaces, et tout ce qui compte peut être recréé depuis Git.
 
-## GitOps Flow
+## Flux GitOps
 
 ```text
-Developer
+Développeur
    |
    | git push
    v
-CI pipeline
+Pipeline CI
    |
-   | build image
-   | push image
+   | construit l’image
+   | pousse l’image
    v
-Container registry
+Registre de conteneurs
    |
-   | update image tag or digest in Git
+   | met à jour le tag ou le digest dans Git
    v
-GitOps repository
+Dépôt GitOps
    |
-   | Argo CD watches Git
+   | Argo CD surveille Git
    v
-k3s cluster
+Cluster k3s
    |
    | rolling update
-   | readiness probes gate traffic
+   | readiness probes avant trafic
    v
 Production
 ```
 
-The server should not be configured by hand after bootstrap. Hand changes disappear. Git changes survive.
+Le serveur ne devrait pas être configuré à la main après le bootstrap. Les changements manuels disparaissent. Les changements Git survivent.
 
-## Tool Stack
+## Stack d’outils
 
-| Need                   | Tool                                 |
-| ---------------------- | ------------------------------------ |
-| Lightweight Kubernetes | k3s                                  |
-| GitOps deployment      | Argo CD                              |
-| Ingress and routing    | Traefik                              |
-| TLS certificates       | cert-manager                         |
-| Secrets in Git         | Sealed Secrets or External Secrets   |
-| Database               | CloudNativePG                        |
-| Cache and queues       | Redis                                |
-| Laravel files          | Longhorn or local persistent volumes |
-| Cluster restore        | Velero                               |
-| Public checks          | Uptime Kuma                          |
+| Besoin                  | Outil                                |
+| ----------------------- | ------------------------------------ |
+| Kubernetes léger        | k3s                                  |
+| Déploiement GitOps      | Argo CD                              |
+| Ingress et routage      | Traefik                              |
+| Certificats TLS         | cert-manager                         |
+| Secrets dans Git        | Sealed Secrets ou External Secrets   |
+| Base de données         | CloudNativePG                        |
+| Cache et queues         | Redis                                |
+| Fichiers Laravel        | Longhorn ou volumes persistants locaux |
+| Restauration du cluster | Velero                               |
+| Contrôles publics       | Uptime Kuma                          |
 
-You can swap tools, but avoid removing the roles. A small platform still needs routing, secrets, storage, backups, and health checks.
+Les outils peuvent changer, mais évitez de supprimer les rôles. Même une petite plateforme a besoin de routage, secrets, stockage, sauvegardes et contrôles de santé.
 
-## The Laravel Unit
+## L’unité Laravel
 
-Each Laravel app should look like the same small unit:
+Chaque application Laravel devrait ressembler au même petit bloc :
 
 ```text
-app namespace
+namespace applicatif
   Ingress
     -> Service
-      -> web Deployment, 2 replicas
+      -> web Deployment, 2 réplicas
 
-  queue Deployment, 1+ replicas
+  queue Deployment, 1+ réplicas
   scheduler CronJob
   app Secret
   storage PVC
-  database declaration
+  déclaration de base de données
 ```
 
-For five apps, repeat the same shape five times.
+Pour cinq applications, répétez cette forme cinq fois.
 
 ```text
 apps
-  app-a  -> web + queue + scheduler + files + db
-  app-b  -> web + queue + scheduler + files + db
-  app-c  -> web + queue + scheduler + files + db
-  app-d  -> web + queue + scheduler + files + db
-  app-e  -> web + queue + scheduler + files + db
+  app-a  -> web + queue + scheduler + fichiers + db
+  app-b  -> web + queue + scheduler + fichiers + db
+  app-c  -> web + queue + scheduler + fichiers + db
+  app-d  -> web + queue + scheduler + fichiers + db
+  app-e  -> web + queue + scheduler + fichiers + db
 ```
 
-The web process is only one part of Laravel. Treat queues and scheduled commands as first-class workloads.
+Le processus web n’est qu’une partie de Laravel. Les queues et les commandes planifiées doivent être traitées comme des workloads à part entière.
 
-## Web Deployment
+## Déploiement web
 
-Run the web process with two replicas when you want zero-downtime deploys.
+Exécutez le processus web avec deux réplicas quand vous voulez des déploiements sans interruption.
 
 ```yaml
 apiVersion: apps/v1
@@ -179,7 +179,7 @@ spec:
       maxSurge: 1
 ```
 
-Traffic should only reach ready pods.
+Le trafic ne doit atteindre que les pods prêts.
 
 ```yaml
 livenessProbe:
@@ -193,9 +193,9 @@ readinessProbe:
     port: 8080
 ```
 
-Use `/up` for "the process is alive". Use `/ready` for "this pod can receive traffic".
+Utilisez `/up` pour dire que le processus est vivant. Utilisez `/ready` pour dire que le pod peut recevoir du trafic.
 
-The app receives its environment from a Kubernetes secret:
+L’application reçoit son environnement depuis un secret Kubernetes :
 
 ```yaml
 envFrom:
@@ -203,17 +203,17 @@ envFrom:
       name: app-env
 ```
 
-The mutable Laravel directory should be a mounted volume:
+Le répertoire Laravel mutable devrait être un volume monté :
 
 ```text
 /var/www/html/storage/app
 ```
 
-Everything else should be inside the image.
+Tout le reste devrait être dans l’image.
 
-## Queue and Scheduler
+## Queues et scheduler
 
-Queues should not run inside the web pod.
+Les queues ne devraient pas tourner dans le pod web.
 
 ```yaml
 apiVersion: apps/v1
@@ -229,9 +229,9 @@ spec:
           command: ["php", "artisan", "horizon"]
 ```
 
-If a queue is critical, Redis must be durable or the queue should use a durable backend.
+Si une queue est critique, Redis doit être durable ou la queue doit utiliser un backend durable.
 
-The scheduler is a Kubernetes CronJob:
+Le scheduler est un CronJob Kubernetes :
 
 ```yaml
 apiVersion: batch/v1
@@ -251,24 +251,24 @@ spec:
               command: ["php", "artisan", "schedule:run"]
 ```
 
-That replaces a permanent cron daemon inside the container.
+Cela remplace un démon cron permanent dans le conteneur.
 
-## Database and Redis
+## Base de données et Redis
 
-Use one managed Postgres cluster inside Kubernetes and create one database per app.
+Utilisez un cluster Postgres managé dans Kubernetes et créez une base par application.
 
 ```text
-Postgres cluster
-  app_a database
-  app_b database
-  app_c database
-  app_d database
-  app_e database
+Cluster Postgres
+  base app_a
+  base app_b
+  base app_c
+  base app_d
+  base app_e
 ```
 
-CloudNativePG gives you a Kubernetes-native Postgres controller, declarative databases, backups, and recovery workflows.
+CloudNativePG fournit un contrôleur Postgres natif Kubernetes, des bases déclaratives, des sauvegardes et des workflows de restauration.
 
-A database declaration can stay tiny:
+Une déclaration de base peut rester minuscule :
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
@@ -282,7 +282,7 @@ spec:
   owner: app
 ```
 
-Redis can be shared by the apps:
+Redis peut être partagé par les applications :
 
 ```text
 Redis
@@ -292,86 +292,86 @@ Redis
   horizon
 ```
 
-For cheap setups, Redis is often the least protected service. Be explicit:
+Sur les configurations peu coûteuses, Redis est souvent le service le moins protégé. Soyez explicite :
 
-| Redis use           | Persistence required?                 |
-| ------------------- | ------------------------------------- |
-| cache               | no                                    |
-| disposable sessions | maybe                                 |
-| queues              | yes, unless losing jobs is acceptable |
-| Horizon metrics     | no                                    |
+| Usage Redis          | Persistance nécessaire ?                          |
+| -------------------- | ------------------------------------------------- |
+| cache                | non                                               |
+| sessions jetables    | peut-être                                         |
+| queues               | oui, sauf si perdre des jobs est acceptable       |
+| métriques Horizon    | non                                               |
 
-## Zero-Downtime Deployments
+## Déploiements sans interruption
 
-The deployment path should look like this:
+Le chemin de déploiement devrait ressembler à ceci :
 
 ```text
-old pod ready
-old pod ready
+ancien pod prêt
+ancien pod prêt
        |
-       | new image arrives
+       | nouvelle image
        v
-old pod ready
-old pod ready
-new pod starting
+ancien pod prêt
+ancien pod prêt
+nouveau pod en démarrage
        |
-       | readiness passes
+       | readiness OK
        v
-old pod ready
-new pod ready
-new pod ready
+ancien pod prêt
+nouveau pod prêt
+nouveau pod prêt
        |
-       | old pods terminate
+       | arrêt des anciens pods
        v
-new pod ready
-new pod ready
+nouveau pod prêt
+nouveau pod prêt
 ```
 
-The minimum requirements:
+Les prérequis minimum :
 
-- two web replicas
+- deux réplicas web
 - `maxUnavailable: 0`
-- a real readiness probe
-- enough memory for old and new pods during rollout
-- no destructive startup tasks
-- migrations run separately
-- database migrations are backward-compatible
+- une vraie readiness probe
+- assez de mémoire pour les anciens et nouveaux pods pendant le rollout
+- aucune tâche destructive au démarrage
+- migrations exécutées séparément
+- migrations de base de données rétrocompatibles
 
-The migration rule is the one people skip:
-
-```text
-deploy 1: add nullable column or new table
-deploy 2: write code that uses it
-deploy 3: remove old column only after old code is gone
-```
-
-Do not make the new pod require a schema that breaks the old pod still receiving traffic.
-
-## Backups
-
-Backups need to cover four different things.
+La règle de migration est celle que beaucoup oublient :
 
 ```text
-+-------------------+--------------------------+-------------------+
-| State             | Backup                   | Restore target    |
-+-------------------+--------------------------+-------------------+
-| Postgres data     | database backup + WAL    | Postgres cluster  |
-| Laravel files     | volume backup            | app PVC           |
-| Kubernetes state  | Velero                   | cluster resources |
-| Secrets           | sealed in Git + key copy | app secrets       |
-+-------------------+--------------------------+-------------------+
+déploiement 1 : ajouter une colonne nullable ou une nouvelle table
+déploiement 2 : livrer le code qui l’utilise
+déploiement 3 : supprimer l’ancienne colonne seulement après disparition de l’ancien code
 ```
 
-Object storage is the common target:
+Ne faites pas dépendre le nouveau pod d’un schéma qui casse l’ancien pod encore en train de recevoir du trafic.
+
+## Sauvegardes
+
+Les sauvegardes doivent couvrir quatre choses différentes.
 
 ```text
-k3s cluster
-  Postgres backups ----+
-  volume backups ------+----> S3-compatible bucket
-  Velero backups ------+
++-------------------+-----------------------------+------------------------+
+| État              | Sauvegarde                  | Cible de restauration  |
++-------------------+-----------------------------+------------------------+
+| Données Postgres  | sauvegarde DB + WAL         | cluster Postgres       |
+| Fichiers Laravel  | sauvegarde de volume        | PVC applicatif         |
+| État Kubernetes   | Velero                      | ressources du cluster  |
+| Secrets           | scellés dans Git + copie clé| secrets applicatifs    |
++-------------------+-----------------------------+------------------------+
 ```
 
-The daily backup baseline:
+Le stockage objet est la cible la plus courante :
+
+```text
+cluster k3s
+  sauvegardes Postgres ----+
+  sauvegardes volumes -----+----> bucket compatible S3
+  sauvegardes Velero ------+
+```
+
+Base de départ pour une sauvegarde quotidienne :
 
 ```yaml
 schedule: "10 2 * * *"
@@ -379,46 +379,46 @@ ttl: 168h
 destination: s3://production-backups
 ```
 
-Seven days of retention is not magic. It is just a starting point. The important part is that database backups, file backups, and cluster metadata are all covered.
+Sept jours de rétention n’ont rien de magique. C’est seulement un point de départ. L’important est que les sauvegardes de bases, de fichiers et de métadonnées du cluster soient toutes couvertes.
 
-## Disaster Recovery in 30 Minutes
+## Reprise après incident en 30 minutes
 
-Fast recovery comes from reducing decisions during the incident.
+La reprise rapide vient de la réduction des décisions pendant l’incident.
 
 ```text
-00:00  create a new VPS
-05:00  install k3s
-08:00  install Argo CD
-10:00  restore Git access and secret decryption key
-12:00  sync platform controllers
-15:00  restore Postgres and volumes from S3
-22:00  sync Laravel apps
-25:00  point DNS or floating IP to the new server
-30:00  uptime checks green
+00:00  créer un nouveau VPS
+05:00  installer k3s
+08:00  installer Argo CD
+10:00  restaurer l’accès Git et la clé de déchiffrement des secrets
+12:00  synchroniser les contrôleurs de plateforme
+15:00  restaurer Postgres et les volumes depuis S3
+22:00  synchroniser les applications Laravel
+25:00  pointer le DNS ou l’IP flottante vers le nouveau serveur
+30:00  contrôles de disponibilité au vert
 ```
 
-The recovery diagram:
+Le schéma de reprise :
 
 ```text
-Git repository                 S3 backups
-  platform manifests             postgres
-  app manifests                  files
-  sealed secrets                 cluster resources
+Dépôt Git                    Sauvegardes S3
+  manifests plateforme          postgres
+  manifests apps                fichiers
+  secrets scellés               ressources cluster
         |                              |
         +--------------+---------------+
                        |
                        v
-                  new k3s server
+                 nouveau serveur k3s
                        |
                        v
-                  apps restored
+                 applications restaurées
 ```
 
-The cluster is disposable. Git and backups are not.
+Le cluster est jetable. Git et les sauvegardes ne le sont pas.
 
-## Minimal Monitoring
+## Supervision minimale
 
-Start with checks you will actually react to.
+Commencez par des contrôles sur lesquels vous réagirez vraiment.
 
 ```text
 Uptime Kuma
@@ -429,48 +429,48 @@ Uptime Kuma
   GET https://app-e.example.com/up
 
 Argo CD
-  apps are Synced
-  apps are Healthy
+  apps synchronisées
+  apps saines
 
-Database
-  cluster healthy
-  latest backup recent
+Base de données
+  cluster sain
+  sauvegarde récente
 
-Backups
-  latest Velero backup completed
-  volume backup target reachable
+Sauvegardes
+  dernière sauvegarde Velero terminée
+  cible de sauvegarde des volumes joignable
 
-Node
-  disk not full
-  memory not exhausted
+Nœud
+  disque non plein
+  mémoire non épuisée
 ```
 
-Prometheus and Grafana are useful later. For the first version, public uptime checks plus backup freshness already catch the failures that matter most.
+Prometheus et Grafana sont utiles plus tard. Pour une première version, des contrôles publics de disponibilité et la fraîcheur des sauvegardes détectent déjà les pannes les plus importantes.
 
-## Final Checklist
+## Checklist finale
 
-For each Laravel app:
+Pour chaque application Laravel :
 
-- one namespace
-- one web deployment with two replicas
-- one service
-- one ingress with TLS
-- one queue deployment if jobs are used
-- one scheduler CronJob
-- one environment secret
-- one PVC for `storage/app` if files are local
-- one database
-- readiness and liveness probes
-- app included in uptime checks
-- app state included in backups
+- un namespace
+- un déploiement web avec deux réplicas
+- un service
+- un ingress avec TLS
+- un déploiement queue si des jobs sont utilisés
+- un CronJob scheduler
+- un secret d’environnement
+- un PVC pour `storage/app` si les fichiers sont locaux
+- une base de données
+- des readiness et liveness probes
+- l’application incluse dans les contrôles de disponibilité
+- l’état applicatif inclus dans les sauvegardes
 
-For the platform:
+Pour la plateforme :
 
-- Argo CD can rebuild the cluster from Git
-- secrets can be decrypted after disaster recovery
-- Postgres backups restore successfully
-- file backups restore successfully
-- Velero can restore Kubernetes resources
-- DNS or IP failover is documented
+- Argo CD peut reconstruire le cluster depuis Git
+- les secrets peuvent être déchiffrés après une reprise
+- les sauvegardes Postgres se restaurent correctement
+- les sauvegardes de fichiers se restaurent correctement
+- Velero peut restaurer les ressources Kubernetes
+- le basculement DNS ou IP est documenté
 
-That is the real architecture. Kubernetes is only the runtime. The system works because deployment, backups, and recovery are designed together.
+Voilà la vraie architecture. Kubernetes n’est que le runtime. Le système fonctionne parce que le déploiement, les sauvegardes et la reprise sont conçus ensemble.

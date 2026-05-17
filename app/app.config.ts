@@ -3,7 +3,6 @@ export default defineAppConfig({
     picture: {
       light: "/profile.png",
       dark: "/profile.png",
-      alt: "My profile picture",
     },
     meetingLink: "https://calendly.com/youenn-le-gouedec/30min",
     maltLink: "https://www.malt.fr/profile/youennlegouedec",
@@ -25,26 +24,22 @@ export default defineAppConfig({
     },
   },
   footer: {
-    credits: `Built with Nuxt • ${new Date().getFullYear()}`,
     colorMode: false,
     links: [
       {
         icon: "i-simple-icons-x",
         to: "https://x.com/_y_l_g_",
         target: "_blank",
-        "aria-label": "YL on X",
       },
       {
         icon: "i-simple-icons-github",
         to: "https://github.com/y-l-g",
         target: "_blank",
-        "aria-label": "YL on GitHub",
       },
       {
         icon: "i-simple-icons-malt",
         to: "https://www.malt.fr/profile/youennlegouedec",
         target: "_blank",
-        "aria-label": "YL on Malt",
         ui: {
           leadingIcon: "size-12",
         },
@@ -55,72 +50,7 @@ export default defineAppConfig({
     name: "YL",
     avatar: {
       src: "/profile.png",
-      alt: "YL}",
+      alt: "YL",
     },
   },
-  toc: {
-    title: "Table of Contents",
-  },
-  columns: [
-    {
-      label: "Backend",
-      children: [
-        {
-          label: "Laravel",
-          to: "https://laravel.com/",
-        },
-        {
-          label: "Spatie packages",
-          to: "https://spatie.be/",
-        },
-        {
-          label: "Postgres",
-          to: "https://www.postgresql.org/",
-        },
-      ],
-    },
-    {
-      label: "Frontend",
-      children: [
-        {
-          label: "Vue",
-          to: "https://vuejs.org/",
-        },
-        {
-          label: "Nuxt",
-          to: "https://nuxt.com/",
-        },
-        {
-          label: "Inertia.js",
-          to: "https://inertiajs.com/",
-        },
-      ],
-    },
-    {
-      label: "Infrastructure",
-      children: [
-        {
-          label: "FrankenPHP",
-          to: "https://frankenphp.dev/",
-        },
-        {
-          label: "K3s",
-          to: "https://k3s.io/",
-        },
-        {
-          label: "ArgoCD",
-          to: "https://argoproj.github.io/",
-        },
-      ],
-    },
-    {
-      label: "Interests",
-      children: [
-        {
-          label: "Go",
-          to: "https://go.dev/",
-        },
-      ],
-    },
-  ],
 });

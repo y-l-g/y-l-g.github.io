@@ -5,8 +5,21 @@ defineProps<{
   page: IndexCollectionItem;
 }>();
 
-const { data: posts } = await useAsyncData("index-blogs", () =>
-  queryCollection("blog").order("date", "DESC").limit(3).all(),
+const { locale } = useI18n();
+const dateLocale = computed(() => getDateLocale(locale.value));
+const blogPattern = computed(() => getLocalizedBlogPattern(locale.value));
+
+const { data: posts } = await useAsyncData(
+  `index-blogs-${locale.value}`,
+  () =>
+    queryCollection("blog")
+      .where("path", "LIKE", blogPattern.value)
+      .order("date", "DESC")
+      .limit(3)
+      .all(),
+  {
+    watch: [locale],
+  },
 );
 if (!posts.value) {
   throw createError({
@@ -15,13 +28,6 @@ if (!posts.value) {
     fatal: true,
   });
 }
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-};
 </script>
 
 <template>
@@ -37,7 +43,7 @@ const formatDate = (dateString: string) => {
         :to="post.path"
       >
         <div class="text-xs font-medium">
-          {{ formatDate(post.date) }}
+          {{ formatDate(post.date, dateLocale) }}
         </div>
         <div class="text-lg font-medium mt-1">{{ post.title }}</div>
         <div class="text-muted mt-2">{{ post.description }}</div>

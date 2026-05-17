@@ -2,6 +2,7 @@
 import type { IndexCollectionItem } from "@nuxt/content";
 
 const { footer, global } = useAppConfig();
+const { t } = useI18n();
 
 defineProps<{
   page: IndexCollectionItem;
@@ -39,7 +40,7 @@ defineProps<{
           :src="global.picture?.light!"
           width="150"
           height="150"
-          :alt="global.picture?.alt!"
+          :alt="t('hero.profileAlt')"
         />
       </Motion>
     </template>
@@ -110,7 +111,7 @@ defineProps<{
             icon="i-lucide-calendar"
             :to="global.meetingLink"
             target="_blank"
-            label="Book a call"
+            :label="t('hero.bookCall')"
           />
 
           <!-- <UButton
@@ -144,8 +145,8 @@ defineProps<{
             </template>
             {{
               global.available
-                ? "Available for new projects"
-                : "Not available at the moment"
+                ? t("hero.available")
+                : t("hero.unavailable")
             }}
           </UBadge>
         </div>

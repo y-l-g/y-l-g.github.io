@@ -1,6 +1,6 @@
 export function copyToClipboard(
   toCopy: string,
-  message: string = "Copied to clipboard"
+  message: string,
 ) {
   const toast = useToast();
   navigator.clipboard.writeText(toCopy).then(() => {

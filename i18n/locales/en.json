@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "language": "Switch to {name}"
+  },
+  "hero": {
+    "bookCall": "Book a call",
+    "available": "Available for new projects",
+    "unavailable": "Not available at the moment",
+    "profileAlt": "Portrait of Youenn Le Gouedec"
+  },
+  "blog": {
+    "back": "Blog",
+    "copyLink": "Copy link",
+    "copied": "Article link copied to clipboard",
+    "minRead": "MIN READ"
+  },
+  "footer": {
+    "credits": "Built with Nuxt • {year}",
+    "columns": {
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "infrastructure": "Infrastructure",
+      "interests": "Interests"
+    },
+    "social": {
+      "x": "YL on X",
+      "github": "YL on GitHub",
+      "malt": "YL on Malt"
+    }
+  },
+  "toc": {
+    "title": "Table of Contents"
+  }
+}

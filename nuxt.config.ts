@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/image",
     "@nuxt/ui",
+    "@nuxtjs/i18n",
     "@nuxt/content",
     "@nuxtjs/sitemap",
     "@vueuse/nuxt",
@@ -14,6 +15,26 @@ export default defineNuxtConfig({
     url: "https://y-l.fr",
     name: "Youenn Le Gouedec",
   },
+  i18n: {
+    baseUrl: "https://y-l.fr",
+    defaultLocale: "fr",
+    strategy: "prefix_except_default",
+    detectBrowserLanguage: false,
+    locales: [
+      {
+        code: "fr",
+        name: "Français",
+        language: "fr-FR",
+        file: "fr.json",
+      },
+      {
+        code: "en",
+        name: "English",
+        language: "en-US",
+        file: "en.json",
+      },
+    ],
+  },
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   compatibilityDate: "2025-07-15",
@@ -21,6 +42,7 @@ export default defineNuxtConfig({
     prerender: {
       routes: ["/"],
       crawlLinks: true,
+      ignore: ["/en/sitemap.xml"],
     },
   },
   content: {
@@ -47,6 +69,7 @@ export default defineNuxtConfig({
         "lucide:copy",
         "lucide:external-link",
         "lucide:hash",
+        "lucide:languages",
         "lucide:moon",
         "lucide:sun",
         "simple-icons:github",

@@ -1,9 +1,19 @@
 <script setup lang="ts">
 import { defaultSeoImage, withSiteUrl } from "~/utils/seo";
 
-const { data: page } = await useAsyncData("blog-page", () => {
-  return queryCollection("pages").path("/blog").first();
-});
+const { locale } = useI18n();
+const route = useRoute();
+const pagePath = computed(() => getLocalizedContentPath("/blog", locale.value));
+const blogPattern = computed(() => getLocalizedBlogPattern(locale.value));
+const dateLocale = computed(() => getDateLocale(locale.value));
+
+const { data: page } = await useAsyncData(
+  `blog-page-${route.path}`,
+  () => queryCollection("pages").path(pagePath.value).first(),
+  {
+    watch: [locale],
+  },
+);
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -11,8 +21,16 @@ if (!page.value) {
     fatal: true,
   });
 }
-const { data: posts } = await useAsyncData("blogs", () =>
-  queryCollection("blog").order("date", "DESC").all(),
+const { data: posts } = await useAsyncData(
+  `blogs-${route.path}`,
+  () =>
+    queryCollection("blog")
+      .where("path", "LIKE", blogPattern.value)
+      .order("date", "DESC")
+      .all(),
+  {
+    watch: [locale],
+  },
 );
 if (!posts.value) {
   throw createError({
@@ -22,19 +40,21 @@ if (!posts.value) {
   });
 }
 
+const title = computed(() => page.value?.seo?.title || page.value?.title);
+const description = computed(
+  () => page.value?.seo?.description || page.value?.description,
+);
+const canonicalUrl = computed(() => withSiteUrl(pagePath.value));
+
 useSeoMeta({
-  title: page.value?.seo?.title || page.value?.title,
-  ogTitle: page.value?.seo?.title || page.value?.title,
-  description: page.value?.seo?.description || page.value?.description,
-  ogDescription: page.value?.seo?.description || page.value?.description,
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
   ogType: "website",
-  ogUrl: withSiteUrl("/blog"),
+  ogUrl: canonicalUrl,
   ogImage: defaultSeoImage,
   twitterImage: defaultSeoImage,
-});
-
-useHead({
-  link: [{ rel: "canonical", href: withSiteUrl("/blog") }],
 });
 </script>
 
@@ -50,7 +70,7 @@ useHead({
           :to="post.path"
         >
           <div class="text-xs font-medium">
-            {{ formatDate(post.date) }}
+            {{ formatDate(post.date, dateLocale) }}
           </div>
           <div class="text-lg font-medium mt-1">{{ post.title }}</div>
           <div class="text-muted mt-2">{{ post.description }}</div>

@@ -5,9 +5,10 @@ import {
   siteName,
   withSiteUrl,
 } from "~/utils/seo";
-const { toc } = useAppConfig();
 
 const route = useRoute();
+const { locale, t } = useI18n();
+const dateLocale = computed(() => getDateLocale(locale.value));
 
 const { data: page } = await useAsyncData(route.path, () =>
   queryCollection("blog").path(route.path).first(),
@@ -21,15 +22,17 @@ if (!page.value)
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () =>
   queryCollectionItemSurroundings("blog", route.path, {
     fields: ["description"],
-  }),
+  }).where("path", "LIKE", getLocalizedBlogPattern(locale.value)),
 );
 
-const title = page.value?.seo?.title || page.value?.title;
-const description = page.value?.seo?.description || page.value?.description;
-const canonicalUrl = withSiteUrl(route.path);
-const image = page.value.image
-  ? withSiteUrl(page.value.image)
-  : defaultSeoImage;
+const title = computed(() => page.value?.seo?.title || page.value?.title);
+const description = computed(
+  () => page.value?.seo?.description || page.value?.description,
+);
+const canonicalUrl = computed(() => withSiteUrl(route.path));
+const image = computed(() =>
+  page.value?.image ? withSiteUrl(page.value.image) : defaultSeoImage,
+);
 
 useSeoMeta({
   title,
@@ -43,14 +46,13 @@ useSeoMeta({
 });
 
 useHead({
-  link: [{ rel: "canonical", href: canonicalUrl }],
   script: [
     jsonLdScript({
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: page.value.title,
-      description,
-      image,
+      headline: page.value?.title,
+      description: description.value,
+      image: image.value,
       datePublished: page.value.date,
       dateModified: page.value.date,
       author: {
@@ -63,20 +65,12 @@ useHead({
         name: siteName,
         url: withSiteUrl("/"),
       },
-      mainEntityOfPage: canonicalUrl,
+      mainEntityOfPage: canonicalUrl.value,
     }),
   ],
 });
 
-const articleLink = computed(() => canonicalUrl);
-
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-};
+const articleLink = computed(() => canonicalUrl.value);
 </script>
 
 <template>
@@ -92,15 +86,17 @@ const formatDate = (dateString: string) => {
     >
       <ULink to="/blog" class="text-sm flex items-center gap-1 mt-2">
         <UIcon name="lucide:chevron-left" />
-        Blog
+        {{ t("blog.back") }}
       </ULink>
       <div class="flex flex-col gap-3 mt-8">
         <div class="flex text-xs text-muted gap-2">
           <span v-if="page.date">
-            {{ formatDate(page.date) }}
+            {{ formatDate(page.date, dateLocale) }}
           </span>
           <span v-if="page.date && page.minRead"> - </span>
-          <span v-if="page.minRead"> {{ page.minRead }} MIN READ </span>
+          <span v-if="page.minRead">
+            {{ page.minRead }} {{ t("blog.minRead") }}
+          </span>
         </div>
 
         <h1 class="text-4xl font-medium max-w-3xl mx-auto mt-4">
@@ -118,16 +114,14 @@ const formatDate = (dateString: string) => {
             size="sm"
             variant="link"
             color="neutral"
-            label="Copy link"
-            @click="
-              copyToClipboard(articleLink, 'Article link copied to clipboard')
-            "
+            :label="t('blog.copyLink')"
+            @click="copyToClipboard(articleLink, t('blog.copied'))"
           />
         </div>
         <UContentSurround :surround />
       </UPageBody>
       <template v-if="page?.body?.toc?.links?.length" #right>
-        <UContentToc :title="toc?.title" :links="page.body?.toc?.links" />
+        <UContentToc :title="t('toc.title')" :links="page.body?.toc?.links" />
       </template>
     </UPage>
   </UContainer>
