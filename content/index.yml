@@ -1,39 +1,39 @@
 seo:
   title: "Développeur freelance Laravel & Vue en France"
-  description: "Youenn Le Gouedec conçoit des applications web Laravel, Vue, Nuxt et orientées infrastructure pour des SaaS et des petites entreprises en France."
+  description: "Youenn Le Gouedec développe des applications Laravel, Vue et Nuxt pour des SaaS, outils métier et petites équipes qui veulent avancer proprement."
 title: "Youenn Le Gouedec, développeur Laravel & Vue"
-description: "Je construis des applications Laravel, Vue et Nuxt robustes, de l’architecture back-end aux interfaces soignées, avec des workflows de déploiement pragmatiques. Basé en Bretagne, France."
+description: "Je travaille sur des applications Laravel, Vue et Nuxt : back-end, interfaces, intégrations, déploiement et reprise de code existant. Basé en Bretagne, j’aime les projets où il faut comprendre le métier et construire quelque chose de simple à faire évoluer."
 hero:
 about:
   title: "À propos"
   description: |
-    Depuis le début de mon parcours autodidacte dans le développement en 2024, je me concentre surtout sur Laravel et Vue. J’ai aussi une expérience concrète avec Symfony et Docker, ainsi que des explorations autour de Django. J’aime expérimenter de nouvelles technologies, contribuer à des projets open source et concevoir des applications élégantes qui apportent une valeur tangible.
+    Je me suis formé en construisant des projets concrets, surtout autour de Laravel et Vue. Je travaille aussi avec Nuxt, Symfony, Docker et un peu d’infrastructure légère. Ce que j’aime : comprendre un besoin réel, remettre de l’ordre quand le code devient difficile à faire évoluer, et livrer des choses utiles sans ajouter de complexité inutile.
 services:
-  title: "Services freelance"
-  description: "J’aide les petites équipes à concevoir, améliorer et fiabiliser des applications Laravel, Vue, Nuxt et SaaS."
+  title: "Ce que je peux prendre en charge"
+  description: "J’interviens sur des applications web existantes ou en construction, avec une préférence pour les produits Laravel, Vue, Nuxt et les petits SaaS."
   items:
     - title: "Développement Laravel"
-      description: "Architecture back-end, API, files d’attente, facturation, refonte de modules et amélioration de bases existantes."
+      description: "API, modèles trop chargés, jobs fragiles, webhooks, facturation, refonte progressive de modules et amélioration de bases existantes."
       icon: "i-lucide-database"
       to: "/developpeur-laravel"
     - title: "Développement Vue & Nuxt"
-      description: "Interfaces rapides, accessibles et maintenables, connectées à des back-ends Laravel ou à des API existantes."
+      description: "Pages, formulaires, états d’erreur, intégration API, rendu serveur et interfaces qui restent lisibles quand le produit grandit."
       icon: "i-lucide-layout-dashboard"
       to: "/developpeur-vue-nuxt"
     - title: "Développement SaaS"
-      description: "Produits web avec comptes, abonnements, équipes, administration, intégrations et workflows de déploiement."
+      description: "Comptes, abonnements, équipes, administration, emails, droits d’accès, intégrations et déploiement."
       icon: "i-lucide-rocket"
       to: "/developpement-saas"
     - title: "Audit de code Laravel"
-      description: "Analyse pragmatique d’un code existant pour prioriser les risques, la maintenabilité et les prochains chantiers."
+      description: "Lecture d’un code existant pour repérer les zones risquées, les lenteurs, les raccourcis dangereux et les corrections à prioriser."
       icon: "i-lucide-search-check"
       to: "/audit-code-laravel"
 projects:
   title: "Projets"
-  description: "Quelques produits et outils que je construis et maintiens."
+  description: "Quelques produits et outils que je construis ou maintiens."
   items:
     - title: "Notenn"
-      description: "Un projet parallèle pour aider les musiciens à organiser, modifier, générer et partager des partitions écrites en notation ABC."
+      description: "Un outil autour de la notation ABC pour organiser, éditer, générer et partager des partitions."
       links:
         - label: "Étude de cas"
           icon: "i-lucide-arrow-right"
@@ -47,7 +47,7 @@ projects:
           color: "neutral"
           variant: "ghost"
     - title: "Webvite"
-      description: "Un SaaS en production pour les petites entreprises, avec abonnements, sites vitrines et de vrais utilisateurs payants."
+      description: "Un SaaS en production pour petites entreprises, avec abonnements, sites clients et utilisateurs payants."
       links:
         - label: "Étude de cas"
           icon: "i-lucide-arrow-right"
@@ -61,7 +61,7 @@ projects:
           color: "neutral"
           variant: "ghost"
     - title: "Saasterkit"
-      description: "Un starter kit SaaS open source avec Laravel, Vue et Inertia, incluant authentification, équipes, facturation et administration."
+      description: "Un starter kit Laravel, Vue et Inertia pour démarrer un SaaS sans réécrire les mêmes bases à chaque projet."
       links:
         - label: "Étude de cas"
           icon: "i-lucide-arrow-right"
@@ -81,7 +81,7 @@ projects:
           color: "neutral"
           variant: "ghost"
     - title: "FrankenPHP WebSocket"
-      description: "Un module WebSocket expérimental compatible avec Pusher pour du broadcasting temps réel haute performance en PHP."
+      description: "Une expérimentation autour du temps réel en PHP, compatible avec le modèle de broadcasting de Laravel."
       links:
         - label: "Étude de cas"
           icon: "i-lucide-arrow-right"
@@ -98,38 +98,38 @@ blog:
   title: "Notes Laravel, Nuxt et infrastructure"
 faq:
   title: Questions fréquentes
-  description: Réponses aux questions courantes sur ma façon de travailler et mes services.
+  description: Quelques réponses simples sur ma façon de travailler.
   categories:
     - title: Services et méthode
       questions:
         - label: Quels services proposez-vous ?
           content: |
-            Je travaille sur la conception et le développement d’applications web avec Laravel, Vue et Nuxt. Cela inclut l’architecture back-end, les interfaces front-end, les intégrations SaaS, les systèmes de déploiement et l’amélioration de produits existants.
+            Je développe des applications web avec Laravel, Vue et Nuxt. Je peux intervenir sur un nouveau projet, ajouter des fonctionnalités, reprendre une zone fragile du code ou aider à remettre une base existante en ordre.
         - label: Comment se déroule votre méthode de travail ?
           content: |
-            Je privilégie une approche pragmatique et itérative : comprendre le besoin, cadrer le périmètre, livrer par petites étapes, tester ce qui compte et garder une communication claire pendant l’implémentation.
+            Je commence par comprendre le besoin et les contraintes. Ensuite je propose un périmètre court, je livre par étapes, et je garde les décisions techniques visibles pour éviter les surprises.
         - label: Travaillez-vous avec des startups ?
           content: |
-            Oui. J’aime accompagner des petites équipes qui ont besoin d’avancer vite sans sacrifier la qualité technique, la maintenabilité ou la clarté du produit.
+            Oui. Je préfère même les petites équipes où il faut être direct, choisir les bons compromis et livrer sans faire semblant que tout mérite une grosse architecture.
     - title: Budget et délais
       questions:
         - label: Combien coûte généralement un projet ?
           content: |
-            Le budget dépend du périmètre, de la complexité, des intégrations et du calendrier. Après un premier échange, je propose un cadrage adapté au besoin réel plutôt qu’un forfait générique.
+            Cela dépend du périmètre. Une correction ciblée peut être courte, alors qu’un produit complet demande un vrai cadrage. Je préfère estimer après avoir compris le contexte plutôt que donner un prix générique.
         - label: Quelles sont vos modalités de paiement ?
           content: |
-            Les modalités sont définies au démarrage du projet selon le format choisi : mission courte, développement au forfait, accompagnement continu ou renfort produit.
+            On les définit au début selon le format : mission courte, forfait cadré, accompagnement régulier ou renfort sur une période donnée.
         - label: Combien de temps dure un projet typique ?
           content: |
-            Cela dépend fortement du périmètre. Une amélioration ciblée peut prendre quelques jours, tandis qu’un produit plus complet demande plusieurs semaines ou plusieurs mois.
+            Une amélioration précise peut prendre quelques jours. Un module complet ou un produit plus large se compte plutôt en semaines.
         - label: Proposez-vous de l’accompagnement continu ?
           content: |
-            Oui. Je peux intervenir en maintenance, évolution produit, architecture, revue de code ou développement de nouvelles fonctionnalités.
+            Oui. Je peux aider sur la maintenance, les évolutions produit, la revue de code ou les sujets d’architecture quand l’équipe a besoin d’un regard extérieur.
     - title: À propos
       questions:
         - label: Qu’aimez-vous le plus dans votre travail ?
           content: |
-            J’aime transformer des contraintes techniques et produit en applications simples à utiliser, robustes et réellement utiles.
+            J’aime quand un problème flou devient une application plus simple à comprendre, côté utilisateur comme côté code.
         - label: Quels sont vos centres d’intérêt en dehors du travail ?
           content: |
-            Je m’intéresse aux projets open source, aux outils de développement, à l’infrastructure légère et aux produits numériques bien construits.
+            Je m’intéresse à l’open source, aux outils de développement, à l’infrastructure légère et aux petits produits numériques bien construits.
