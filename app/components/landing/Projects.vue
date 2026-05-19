@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="my-10">
+  <section id="projects" class="my-10 scroll-mt-24">
     <div class="text-xl font-medium">
       {{ page.projects.title }}
     </div>

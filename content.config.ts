@@ -6,6 +6,15 @@ const createBaseSchema = () =>
     description: z.string(),
   });
 
+const createSeoSchema = () =>
+  z.object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    canonical: z.string().optional(),
+    noindex: z.boolean().optional(),
+  });
+
 const createButtonSchema = () =>
   z.object({
     label: z.string(),
@@ -50,17 +59,34 @@ const createProjectSchema = () =>
     links: z.array(createButtonSchema()),
   });
 
+const createFaqItemSchema = () =>
+  z.object({
+    label: z.string().nonempty(),
+    content: z.string().nonempty(),
+  });
+
 export default defineContentConfig({
   collections: {
     index: defineCollection({
       type: "page",
       source: [{ include: "index.yml" }, { include: "en/index.yml" }],
-      schema: z.object({
+      schema: createBaseSchema().extend({
+        seo: createSeoSchema().optional(),
         hero: z.object({
           links: z.array(createButtonSchema()),
           images: z.array(createImageSchema()),
         }),
         about: createBaseSchema(),
+        services: createBaseSchema()
+          .extend({
+            items: z.array(
+              createBaseSchema().extend({
+                icon: z.string().optional(),
+                to: z.string(),
+              }),
+            ),
+          })
+          .optional(),
         projects: createBaseSchema().extend({
           items: z.array(createProjectSchema()),
         }),
@@ -84,12 +110,7 @@ export default defineContentConfig({
           categories: z.array(
             z.object({
               title: z.string().nonempty(),
-              questions: z.array(
-                z.object({
-                  label: z.string().nonempty(),
-                  content: z.string().nonempty(),
-                }),
-              ),
+              questions: z.array(createFaqItemSchema()),
             }),
           ),
         }),
@@ -98,9 +119,11 @@ export default defineContentConfig({
     blog: defineCollection({
       type: "page",
       source: [{ include: "blog/*.md" }, { include: "en/blog/*.md" }],
-      schema: z.object({
+      schema: createBaseSchema().extend({
+        seo: createSeoSchema().optional(),
         minRead: z.number(),
         date: z.date(),
+        dateModified: z.date().optional(),
         image: z.string().nonempty().editor({ input: "media" }),
         author: createAuthorSchema(),
       }),
@@ -108,8 +131,56 @@ export default defineContentConfig({
     pages: defineCollection({
       type: "page",
       source: [{ include: "blog.yml" }, { include: "en/blog.yml" }],
-      schema: z.object({
+      schema: createBaseSchema().extend({
+        seo: createSeoSchema().optional(),
         links: z.array(createButtonSchema()),
+      }),
+    }),
+    services: defineCollection({
+      type: "page",
+      source: [
+        { include: "services/*.yml" },
+        { include: "en/services/*.yml" },
+      ],
+      schema: createBaseSchema().extend({
+        seo: createSeoSchema().optional(),
+        headline: z.string(),
+        audience: z.string(),
+        outcomes: z.array(z.string()),
+        services: z.array(
+          createBaseSchema().extend({
+            icon: z.string().optional(),
+          }),
+        ),
+        process: z.array(createBaseSchema()),
+        proof: z.array(createBaseSchema()),
+        faq: z.array(createFaqItemSchema()),
+        cta: createBaseSchema().extend({
+          primaryLabel: z.string(),
+          secondaryLabel: z.string().optional(),
+        }),
+      }),
+    }),
+    projects: defineCollection({
+      type: "page",
+      source: [
+        { include: "projects/*.yml" },
+        { include: "en/projects/*.yml" },
+      ],
+      schema: createBaseSchema().extend({
+        seo: createSeoSchema().optional(),
+        headline: z.string(),
+        role: z.string(),
+        stack: z.array(z.string()),
+        outcomes: z.array(z.string()),
+        body: z.array(createBaseSchema()),
+        links: z.array(createButtonSchema()),
+        relatedServices: z.array(
+          z.object({
+            label: z.string(),
+            to: z.string(),
+          }),
+        ),
       }),
     }),
     speaking: defineCollection({

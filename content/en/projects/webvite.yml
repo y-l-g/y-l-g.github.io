@@ -1,0 +1,36 @@
+seo:
+  title: "Webvite, production SaaS for small businesses"
+  description: "Webvite case study: SaaS with subscriptions, customer websites, administration and paying users."
+headline: "Project"
+title: "Webvite"
+description: "A production SaaS for small businesses, with subscriptions, company websites and real paying users."
+role: "Product development on a real SaaS: customer journeys, subscription management, website creation and running a production service."
+stack:
+  - "Laravel"
+  - "Vue"
+  - "SaaS"
+  - "Payments"
+  - "Production"
+outcomes:
+  - "Product used by real customers."
+  - "Subscriptions and signup flows."
+  - "Real operational constraints: maintenance, errors, support and evolution."
+body:
+  - title: "Usable SaaS"
+    description: "Webvite shows a product-oriented approach: shipping screens is not enough, the journeys, payments and edge cases matter."
+  - title: "Business back end"
+    description: "The project connects accounts, websites, subscriptions and administration in an architecture that remains understandable."
+  - title: "Field experience"
+    description: "Working on a paid service forces reliability, clarity and improvements that genuinely matter."
+links:
+  - label: "Visit"
+    icon: "i-lucide-external-link"
+    to: "https://webvite.eu"
+    target: "_blank"
+    color: "neutral"
+    variant: "subtle"
+relatedServices:
+  - label: "SaaS development"
+    to: "/developpement-saas"
+  - label: "Laravel development"
+    to: "/developpeur-laravel"

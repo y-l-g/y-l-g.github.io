@@ -41,6 +41,9 @@ jobs:
         env:
           NITRO_PRESET: github_pages
 
+      - name: SEO checks
+        run: npm run seo:check
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

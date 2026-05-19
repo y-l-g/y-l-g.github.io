@@ -1,6 +1,8 @@
 {
   "nav": {
     "home": "Accueil",
+    "services": "Services",
+    "projects": "Projets",
     "blog": "Blog",
     "language": "Passer en {name}"
   },

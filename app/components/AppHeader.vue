@@ -15,6 +15,10 @@ const items = computed<NavigationMenuItem[]>(() => [
     to: "/",
   },
   {
+    label: t("nav.services"),
+    to: "/#services",
+  },
+  {
     label: t("nav.blog"),
     to: "/blog",
   },

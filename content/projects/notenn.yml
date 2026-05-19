@@ -1,0 +1,35 @@
+seo:
+  title: "Notenn, projet Nuxt pour partitions ABC"
+  description: "Étude de cas Notenn : organisation, édition, rendu et partage de partitions en notation ABC avec une approche produit simple."
+headline: "Projet"
+title: "Notenn"
+description: "Un projet pour aider les musiciens à organiser, modifier, générer et partager des partitions écrites en notation ABC."
+role: "Conception produit et développement d’une application centrée sur un workflow musical précis : gérer des partitions texte, les rendre lisibles et faciliter leur partage."
+stack:
+  - "Nuxt"
+  - "Vue"
+  - "ABC notation"
+  - "Produit SaaS"
+outcomes:
+  - "Workflow centré sur un format de partition spécialisé."
+  - "Interface pensée pour organiser et retrouver rapidement du contenu musical."
+  - "Base produit extensible pour l’édition, le rendu et le partage."
+body:
+  - title: "Produit de niche"
+    description: "Notenn montre une capacité à transformer un usage très spécifique en interface claire, sans perdre l’utilisateur dans des options inutiles."
+  - title: "Structure front-end"
+    description: "Le projet met l’accent sur la lisibilité des vues, la gestion de contenu et les interactions fréquentes d’un outil d’édition."
+  - title: "Apprentissage produit"
+    description: "Il sert aussi de terrain pour tester des décisions UX, de rendu et d’organisation avant de les appliquer à d’autres produits."
+links:
+  - label: "Visiter"
+    icon: "i-lucide-external-link"
+    to: "https://notenn.com"
+    target: "_blank"
+    color: "neutral"
+    variant: "subtle"
+relatedServices:
+  - label: "Développement Vue & Nuxt"
+    to: "/developpeur-vue-nuxt"
+  - label: "Développement SaaS"
+    to: "/developpement-saas"

@@ -1,5 +1,16 @@
 <script setup lang="ts">
-import { defaultSeoImage, jsonLdScript, siteName, withSiteUrl } from "~/utils/seo";
+import {
+  defaultSeoImage,
+  defaultSeoImageHeight,
+  defaultSeoImageWidth,
+  jsonLdScript,
+  languageFromLocale,
+  personId,
+  personJsonLd,
+  siteName,
+  withSiteUrl,
+  websiteId,
+} from "~/utils/seo";
 
 const { locale } = useI18n();
 const route = useRoute();
@@ -20,11 +31,14 @@ if (!page.value) {
   });
 }
 
-const title = computed(() => page.value?.seo.title || page.value?.title);
+const title = computed(() => page.value?.seo?.title || page.value?.title);
 const description = computed(
-  () => page.value?.seo.description || page.value?.description,
+  () => page.value?.seo?.description || page.value?.description,
 );
 const canonicalUrl = computed(() => withSiteUrl(pagePath.value));
+const faqQuestions = computed(
+  () => page.value?.faq.categories.flatMap((category) => category.questions) || [],
+);
 
 useSeoMeta({
   title,
@@ -34,6 +48,8 @@ useSeoMeta({
   ogType: "profile",
   ogUrl: canonicalUrl,
   ogImage: defaultSeoImage,
+  ogImageWidth: defaultSeoImageWidth,
+  ogImageHeight: defaultSeoImageHeight,
   twitterImage: defaultSeoImage,
 });
 
@@ -41,29 +57,35 @@ useHead(() => ({
   script: [
     jsonLdScript({
       "@context": "https://schema.org",
-      "@type": "Person",
-      name: siteName,
+      "@type": "ProfilePage",
+      "@id": `${canonicalUrl.value}#profile`,
       url: canonicalUrl.value,
-      image: defaultSeoImage,
-      jobTitle: page.value?.title,
-      address: {
-        "@type": "PostalAddress",
-        addressRegion: "Bretagne",
-        addressCountry: "FR",
-      },
-      sameAs: [
-        "https://github.com/y-l-g",
-        "https://x.com/_y_l_g_",
-        "https://www.malt.fr/profile/youennlegouedec",
-      ],
-      knowsAbout: ["Laravel", "Vue", "Nuxt", "SaaS", "GitOps", "k3s"],
+      name: title.value,
+      description: description.value,
+      inLanguage: languageFromLocale(locale.value),
+      mainEntity: personJsonLd(),
     }),
     jsonLdScript({
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": websiteId,
       name: siteName,
-      url: canonicalUrl.value,
-      inLanguage: locale.value === DEFAULT_LOCALE ? "fr-FR" : "en-US",
+      url: withSiteUrl("/"),
+      inLanguage: languageFromLocale(locale.value),
+      publisher: { "@id": personId },
+    }),
+    jsonLdScript({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl.value}#faq`,
+      mainEntity: faqQuestions.value.map((question) => ({
+        "@type": "Question",
+        name: question.label,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: question.content,
+        },
+      })),
     }),
   ],
 }));
@@ -74,8 +96,10 @@ useHead(() => ({
     <UPage v-if="page">
       <LandingHero :page />
       <LandingAbout :page />
+      <LandingServices :page />
       <LandingProjects :page />
-      <!-- <LandingBlog :page /> -->
+      <LandingFaq :page />
+      <LandingBlog :page />
     </UPage>
   </UContainer>
 </template>

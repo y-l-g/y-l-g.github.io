@@ -1,0 +1,35 @@
+seo:
+  title: "FrankenPHP WebSocket, module temps réel PHP"
+  description: "Étude de cas FrankenPHP WebSocket : module expérimental compatible Pusher pour broadcasting temps réel haute performance en PHP."
+headline: "Projet expérimental"
+title: "FrankenPHP WebSocket"
+description: "Un module WebSocket expérimental compatible avec Pusher pour du broadcasting temps réel haute performance en PHP."
+role: "Exploration technique autour du temps réel en PHP, avec un objectif de compatibilité pratique avec des usages Laravel existants."
+stack:
+  - "PHP"
+  - "FrankenPHP"
+  - "WebSocket"
+  - "Laravel broadcasting"
+outcomes:
+  - "Expérimentation sur des contraintes temps réel."
+  - "Compatibilité pensée avec des conventions Laravel."
+  - "Travail bas niveau utile pour comprendre les limites de la stack."
+body:
+  - title: "Comprendre le temps réel"
+    description: "Le projet oblige à traiter connexions persistantes, messages, compatibilité de protocole et performance au-delà d’un CRUD classique."
+  - title: "Lien avec Laravel"
+    description: "L’objectif Pusher-compatible rend l’expérimentation utile pour des applications Laravel qui utilisent déjà le broadcasting."
+  - title: "Culture infrastructure"
+    description: "Ce type de projet nourrit les décisions sur le déploiement, les workers, les ressources et l’observabilité."
+links:
+  - label: "Source"
+    icon: "i-simple-icons-github"
+    to: "https://github.com/y-l-g/websocket"
+    target: "_blank"
+    color: "neutral"
+    variant: "subtle"
+relatedServices:
+  - label: "Développement Laravel"
+    to: "/developpeur-laravel"
+  - label: "Audit de code Laravel"
+    to: "/audit-code-laravel"

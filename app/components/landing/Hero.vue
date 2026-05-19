@@ -19,72 +19,23 @@ defineProps<{
     }"
   >
     <template #headline>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)',
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)',
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.1,
-        }"
-      >
-        <NuxtImg
-          class="rounded-full"
-          :src="global.picture?.light!"
-          width="150"
-          height="150"
-          :alt="t('hero.profileAlt')"
-        />
-      </Motion>
+      <NuxtImg
+        class="rounded-full"
+        :src="global.picture?.light!"
+        width="150"
+        height="150"
+        loading="eager"
+        fetchpriority="high"
+        :alt="t('hero.profileAlt')"
+      />
     </template>
 
     <template #title>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)',
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)',
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.1,
-        }"
-      >
-        {{ page.title }}
-      </Motion>
+      {{ page.title }}
     </template>
 
     <template #description>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)',
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)',
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.3,
-        }"
-      >
-        {{ page.description }}
-      </Motion>
+      {{ page.description }}
     </template>
 
     <template #links>

@@ -1,0 +1,35 @@
+seo:
+  title: "Notenn, Nuxt project for ABC music scores"
+  description: "Notenn case study: organizing, editing, rendering and sharing ABC notation scores with a focused product approach."
+headline: "Project"
+title: "Notenn"
+description: "A project for musicians to organize, edit, render and share scores written in ABC notation."
+role: "Product design and development for a precise music workflow: manage text-based scores, render them clearly and make sharing easier."
+stack:
+  - "Nuxt"
+  - "Vue"
+  - "ABC notation"
+  - "SaaS product"
+outcomes:
+  - "Workflow centered on a specialized score format."
+  - "Interface designed to organize and retrieve music content quickly."
+  - "Extensible product base for editing, rendering and sharing."
+body:
+  - title: "Niche product"
+    description: "Notenn shows the ability to turn a specific use case into a clear interface without overwhelming users."
+  - title: "Front-end structure"
+    description: "The project emphasizes readable views, content management and frequent interactions in an editing tool."
+  - title: "Product learning"
+    description: "It is also a place to test UX, rendering and organization decisions before applying them elsewhere."
+links:
+  - label: "Visit"
+    icon: "i-lucide-external-link"
+    to: "https://notenn.com"
+    target: "_blank"
+    color: "neutral"
+    variant: "subtle"
+relatedServices:
+  - label: "Vue & Nuxt development"
+    to: "/developpeur-vue-nuxt"
+  - label: "SaaS development"
+    to: "/developpement-saas"

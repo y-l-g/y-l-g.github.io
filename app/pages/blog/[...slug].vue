@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import {
+  breadcrumbJsonLd,
   defaultSeoImage,
+  defaultSeoImageHeight,
+  defaultSeoImageWidth,
   jsonLdScript,
+  languageFromLocale,
+  personId,
   siteName,
   withSiteUrl,
 } from "~/utils/seo";
@@ -42,33 +47,44 @@ useSeoMeta({
   ogType: "article",
   ogUrl: canonicalUrl,
   ogImage: image,
+  ogImageWidth: defaultSeoImageWidth,
+  ogImageHeight: defaultSeoImageHeight,
   twitterImage: image,
 });
 
-useHead({
+useHead(() => ({
   script: [
+    jsonLdScript(
+      breadcrumbJsonLd([
+        { name: t("nav.home"), path: getLocalizedContentPath("/", locale.value) },
+        { name: t("nav.blog"), path: getLocalizedContentPath("/blog", locale.value) },
+        { name: page.value?.title || "", path: route.path },
+      ]),
+    ),
     jsonLdScript({
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "BlogPosting",
+      "@id": `${canonicalUrl.value}#article`,
       headline: page.value?.title,
       description: description.value,
       image: image.value,
-      datePublished: page.value.date,
-      dateModified: page.value.date,
+      datePublished: page.value?.date,
+      dateModified: page.value?.dateModified || page.value?.date,
       author: {
-        "@type": "Person",
-        name: page.value.author?.name || siteName,
+        "@id": personId,
+        name: page.value?.author?.name || siteName,
         url: withSiteUrl("/"),
       },
       publisher: {
-        "@type": "Person",
+        "@id": personId,
         name: siteName,
         url: withSiteUrl("/"),
       },
+      inLanguage: languageFromLocale(locale.value),
       mainEntityOfPage: canonicalUrl.value,
     }),
   ],
-});
+}));
 
 const articleLink = computed(() => canonicalUrl.value);
 </script>
