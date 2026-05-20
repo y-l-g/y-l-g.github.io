@@ -56,6 +56,7 @@ const createProjectSchema = () =>
   z.object({
     title: z.string(),
     description: z.string(),
+    stack: z.array(z.string()).optional(),
     links: z.array(createButtonSchema()),
   });
 
@@ -76,7 +77,13 @@ export default defineContentConfig({
           links: z.array(createButtonSchema()),
           images: z.array(createImageSchema()),
         }),
-        about: createBaseSchema(),
+        about: createBaseSchema().extend({
+          items: z.array(
+            createBaseSchema().extend({
+              icon: z.string().optional(),
+            }),
+          ).optional(),
+        }),
         services: createBaseSchema()
           .extend({
             items: z.array(

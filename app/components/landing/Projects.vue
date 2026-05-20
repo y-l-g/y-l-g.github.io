@@ -7,36 +7,20 @@ defineProps<{
 </script>
 
 <template>
-  <section id="projects" class="my-10 scroll-mt-24">
-    <div class="text-xl font-medium">
-      {{ page.projects.title }}
-    </div>
-    <!-- <div class="text-muted">
-      {{ page.projects.description }}
-    </div> -->
-
-    <div class="mt-4 grid gap-4 sm:grid-cols-2">
-      <UPageCard
+  <LandingSection
+    id="projects"
+    :title="page.projects.title"
+    :description="page.projects.description"
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <LandingProjectCard
         v-for="project in page.projects.items"
         :key="project.title"
-        variant="naked"
-        :ui="{ container: 'gap-0' }"
-      >
-        <div class="text-lg font-medium">
-          {{ project.title }}
-        </div>
-        <div class="text-muted mt-2">
-          {{ project.description }}
-        </div>
-
-        <div class="mt-3 flex flex-wrap gap-2">
-          <UButton
-            v-for="link in project.links"
-            :key="`${project.title}-${link.label}`"
-            v-bind="{ size: 'sm', ...link }"
-          />
-        </div>
-      </UPageCard>
+        :title="project.title"
+        :description="project.description"
+        :stack="project.stack"
+        :links="project.links"
+      />
     </div>
-  </section>
+  </LandingSection>
 </template>

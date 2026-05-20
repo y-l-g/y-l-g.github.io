@@ -8,6 +8,16 @@ about:
   title: "About Me"
   description: |
     Since embarking on my self-taught development journey in 2024, I've primarily focused on Laravel and Vue. My toolkit also includes hands-on experience with Symfony and Docker, alongside explorations into Django. I thrive on experimenting with new technologies, contributing to open-source projects, and crafting elegant applications that deliver tangible value.
+  items:
+    - title: "Product context"
+      description: "I start with the business need, users and constraints before deciding what the technical shape should be."
+      icon: "i-lucide-scan-search"
+    - title: "Laravel, Vue, Nuxt"
+      description: "A stable primary stack for building quickly, keeping code maintainable and improving existing products."
+      icon: "i-lucide-blocks"
+    - title: "Pragmatic production"
+      description: "Deployment, errors, performance, backups and small decisions that make an application more reliable."
+      icon: "i-lucide-server-cog"
 services:
   title: "Freelance services"
   description: "I help small teams build, improve and stabilize Laravel, Vue, Nuxt and SaaS applications."
@@ -34,6 +44,10 @@ projects:
   items:
     - title: "Notenn"
       description: "A side project for musicians to organize, edit, render, and share scores written in ABC notation."
+      stack:
+        - "Nuxt"
+        - "Music"
+        - "ABC"
       links:
         - label: "Case study"
           icon: "i-lucide-arrow-right"
@@ -48,6 +62,10 @@ projects:
           variant: "ghost"
     - title: "Webvite"
       description: "A production SaaS for small businesses, with subscriptions, company websites, and real paying users."
+      stack:
+        - "Laravel"
+        - "Vue"
+        - "SaaS"
       links:
         - label: "Case study"
           icon: "i-lucide-arrow-right"
@@ -62,6 +80,10 @@ projects:
           variant: "ghost"
     - title: "Saasterkit"
       description: "An open-source Laravel, Vue, and Inertia SaaS starter kit with auth, teams, billing, and admin features."
+      stack:
+        - "Laravel"
+        - "Inertia"
+        - "Open source"
       links:
         - label: "Case study"
           icon: "i-lucide-arrow-right"
@@ -82,6 +104,10 @@ projects:
           variant: "ghost"
     - title: "FrankenPHP WebSocket"
       description: "An experimental Pusher-compatible WebSocket module for high-performance real-time broadcasting in PHP."
+      stack:
+        - "PHP"
+        - "Realtime"
+        - "WebSocket"
       links:
         - label: "Case study"
           icon: "i-lucide-arrow-right"
@@ -96,6 +122,7 @@ projects:
           variant: "ghost"
 blog:
   title: "Laravel, Nuxt and Infrastructure Notes"
+  description: "Short notes about architecture, technical choices and production details worth documenting."
 faq:
   title: Frequently Asked Questions
   description: Answers to common questions about my process and services.

@@ -31,23 +31,29 @@ if (!posts.value) {
 </script>
 
 <template>
-  <div class="my-10">
-    <div class="text-xl font-medium">
-      {{ page.blog.title }}
-    </div>
-    <div v-for="post in posts" :key="post.path" class="space-y-4">
-      <UPageCard
-        class="my-4"
-        :ui="{ container: 'gap-0' }"
-        variant="naked"
+  <LandingSection
+    id="blog"
+    :title="page.blog.title"
+    :description="page.blog.description"
+  >
+    <div class="grid gap-4 lg:grid-cols-3">
+      <LandingCard
+        v-for="post in posts"
+        :key="post.path"
         :to="post.path"
       >
-        <div class="text-xs font-medium">
-          {{ formatDate(post.date, dateLocale) }}
+        <div class="space-y-3">
+          <div class="text-sm font-medium text-primary">
+            {{ formatDate(post.date, dateLocale) }}
+          </div>
+          <h3 class="text-base font-semibold text-highlighted text-pretty">
+            {{ post.title }}
+          </h3>
+          <p class="text-sm leading-6 text-muted text-pretty">
+            {{ post.description }}
+          </p>
         </div>
-        <div class="text-lg font-medium mt-1">{{ post.title }}</div>
-        <div class="text-muted mt-2">{{ post.description }}</div>
-      </UPageCard>
+      </LandingCard>
     </div>
-  </div>
+  </LandingSection>
 </template>

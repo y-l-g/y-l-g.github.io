@@ -17,16 +17,14 @@ const items = computed<AccordionItem[]>(() =>
 </script>
 
 <template>
-  <section class="my-14">
-    <div class="flex flex-col gap-2">
-      <h2 class="text-xl font-medium">
-        {{ page.faq.title }}
-      </h2>
-      <p class="text-muted max-w-2xl">
-        {{ page.faq.description }}
-      </p>
+  <LandingSection
+    id="faq"
+    :title="page.faq.title"
+    :description="page.faq.description"
+    layout="split"
+  >
+    <div class="rounded-lg bg-elevated/30 px-3 ring ring-default">
+      <UAccordion :items="items" />
     </div>
-
-    <UAccordion :items="items" class="mt-4" />
-  </section>
+  </LandingSection>
 </template>

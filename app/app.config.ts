@@ -14,6 +14,13 @@ export default defineAppConfig({
       primary: "blue",
       neutral: "neutral",
     },
+    icons: {
+      arrowLeft: "i-lucide-arrow-left",
+      arrowRight: "i-lucide-arrow-right",
+      chevronDown: "i-lucide-chevron-down",
+      chevronLeft: "i-lucide-chevron-left",
+      chevronRight: "i-lucide-chevron-right",
+    },
     pageHero: {
       slots: {
         container: "py-18 sm:py-24 lg:py-32",
