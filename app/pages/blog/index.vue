@@ -99,21 +99,40 @@ useHead(() => ({
 <template>
   <UContainer>
     <UPage v-if="page">
-      <UPageHero :title="page.title" :description="page.description" />
-      <div v-for="post in posts" :key="post.path" class="space-y-4">
-        <UPageCard
-          class="my-4"
-          :ui="{ container: 'gap-0' }"
-          variant="naked"
-          :to="post.path"
-        >
-          <div class="text-xs font-medium">
-            {{ formatDate(post.date, dateLocale) }}
-          </div>
-          <div class="text-lg font-medium mt-1">{{ post.title }}</div>
-          <div class="text-muted mt-2">{{ post.description }}</div>
-        </UPageCard>
-      </div>
+      <UPageHero
+        :title="page.title"
+        :description="page.description"
+        :ui="{
+          container: 'pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-18',
+        }"
+      >
+        <template #headline>
+          <UBadge color="neutral" variant="soft" size="lg" class="gap-1.5">
+            <UIcon name="i-lucide-book-open" class="size-4" />
+            {{ t("nav.blog") }}
+          </UBadge>
+        </template>
+      </UPageHero>
+
+      <section class="border-t border-muted py-12 sm:py-16 lg:py-20">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <LandingCard
+            v-for="post in posts"
+            :key="post.path"
+            :to="post.path"
+            :eyebrow="formatDate(post.date, dateLocale)"
+            :title="post.title"
+            :description="post.description"
+          >
+            <template #footer>
+              <div class="inline-flex items-center gap-1 text-sm font-medium text-primary">
+                <span>{{ locale === DEFAULT_LOCALE ? "Lire la note" : "Read note" }}</span>
+                <UIcon name="i-lucide-arrow-right" class="size-4" />
+              </div>
+            </template>
+          </LandingCard>
+        </div>
+      </section>
     </UPage>
   </UContainer>
 </template>
