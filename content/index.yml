@@ -1,26 +1,26 @@
 seo:
-  title: "Développeur freelance Laravel & Vue en France"
-  description: "Youenn Le Gouedec développe des applications Laravel, Vue et Nuxt pour des SaaS, outils métier et petites équipes qui veulent avancer proprement."
-title: "Youenn Le Gouedec, développeur Laravel & Vue"
-description: "Je travaille sur des applications Laravel, Vue et Nuxt : back-end, interfaces, intégrations, déploiement et reprise de code existant. Basé en Bretagne, j’aime les projets où il faut comprendre le métier et construire quelque chose de simple à faire évoluer."
+  title: "Développeur web full-stack freelance en France"
+  description: "Youenn Le Gouedec développe des applications web full-stack pour SaaS, outils métier et petites équipes qui veulent avancer proprement."
+title: "Youenn Le Gouedec, développeur web full-stack"
+description: "Je construis et fais évoluer des applications web : back-end, interfaces, intégrations, déploiement et reprise de code existant. Basé en Bretagne, j’aime les projets où il faut comprendre le métier et construire quelque chose de simple à faire évoluer."
 hero:
 about:
   title: "À propos"
   description: |
-    Je me suis formé en construisant des projets concrets, surtout autour de Laravel et Vue. Je travaille aussi avec Nuxt, Symfony, Docker et un peu d’infrastructure légère. Ce que j’aime : comprendre un besoin réel, remettre de l’ordre quand le code devient difficile à faire évoluer, et livrer des choses utiles sans ajouter de complexité inutile.
+    Je me suis formé en construisant des projets concrets : produits SaaS, outils web, interfaces métier, automatisations et déploiements. Je travaille surtout avec Laravel, Vue, Nuxt, Symfony, Docker et un peu d’infrastructure légère. Ce que j’aime : comprendre un besoin réel, remettre de l’ordre quand le code devient difficile à faire évoluer, et livrer des choses utiles sans ajouter de complexité inutile.
   items:
     - title: "Produit & métier"
       description: "Je cherche d’abord à comprendre le besoin, les utilisateurs et les contraintes avant de choisir la solution technique."
       icon: "i-lucide-scan-search"
-    - title: "Laravel, Vue, Nuxt"
-      description: "Une stack principale assez stable pour construire vite, maintenir proprement et reprendre du code existant."
+    - title: "Développement web full-stack"
+      description: "Back-end, front-end, données, intégrations et reprise de code existant avec une stack choisie pour rester maintenable."
       icon: "i-lucide-blocks"
     - title: "Production sobre"
       description: "Déploiement, erreurs, performance, sauvegardes et petites décisions qui rendent une application plus fiable."
       icon: "i-lucide-server-cog"
 services:
   title: "Ce que je peux prendre en charge"
-  description: "J’interviens sur des applications web existantes ou en construction, avec une préférence pour les produits Laravel, Vue, Nuxt et les petits SaaS."
+  description: "J’interviens sur des applications web existantes ou en construction : architecture, interfaces, fonctionnalités produit, intégrations et stabilisation."
   items:
     - title: "Développement Laravel"
       description: "API, modèles trop chargés, jobs fragiles, webhooks, facturation, refonte progressive de modules et amélioration de bases existantes."
@@ -121,8 +121,8 @@ projects:
           color: "neutral"
           variant: "ghost"
 blog:
-  title: "Notes Laravel, Nuxt et infrastructure"
-  description: "Des retours courts sur l’architecture, les choix techniques et les détails de production qui méritent d’être documentés."
+  title: "Notes full-stack, produit et infrastructure"
+  description: "Des retours courts sur le développement web, les choix produit, l’architecture et les détails de production qui méritent d’être documentés."
 faq:
   title: Questions fréquentes
   description: Quelques réponses simples sur ma façon de travailler.
@@ -131,7 +131,7 @@ faq:
       questions:
         - label: Quels services proposez-vous ?
           content: |
-            Je développe des applications web avec Laravel, Vue et Nuxt. Je peux intervenir sur un nouveau projet, ajouter des fonctionnalités, reprendre une zone fragile du code ou aider à remettre une base existante en ordre.
+            Je développe des applications web full-stack. Je peux intervenir sur un nouveau projet, ajouter des fonctionnalités, reprendre une zone fragile du code, améliorer une interface ou aider à remettre une base existante en ordre.
         - label: Comment se déroule votre méthode de travail ?
           content: |
             Je commence par comprendre le besoin et les contraintes. Ensuite je propose un périmètre court, je livre par étapes, et je garde les décisions techniques visibles pour éviter les surprises.

@@ -36,7 +36,7 @@ export const personJsonLd = () => ({
   name: siteName,
   url: siteUrl,
   image: defaultSeoImage,
-  jobTitle: "Développeur freelance Laravel, Vue et Nuxt",
+  jobTitle: "Développeur web full-stack freelance",
   address: {
     "@type": "PostalAddress",
     addressRegion: "Bretagne",
@@ -48,14 +48,18 @@ export const personJsonLd = () => ({
     "https://www.malt.fr/profile/youennlegouedec",
   ],
   knowsAbout: [
+    "Développement web full-stack",
+    "Product engineering",
+    "SaaS",
+    "Back-end architecture",
+    "Front-end development",
     "Laravel",
     "Vue",
     "Nuxt",
-    "SaaS",
-    "GitOps",
-    "k3s",
     "PostgreSQL",
     "Docker",
+    "GitOps",
+    "k3s",
   ],
 });
 

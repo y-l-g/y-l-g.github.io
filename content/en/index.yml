@@ -1,26 +1,26 @@
 seo:
-  title: "Freelance Laravel & Vue Developer in France"
-  description: "Youenn Le Gouedec builds Laravel, Vue, Nuxt and infrastructure-heavy web applications for SaaS products and small businesses in France."
-title: "Youenn Le Gouedec, Laravel & Vue Developer"
-description: "I build robust Laravel, Vue and Nuxt applications, from back-end architecture to polished interfaces and pragmatic deployment workflows. Based in Brittany, France."
+  title: "Freelance full-stack web developer in France"
+  description: "Youenn Le Gouedec builds full-stack web applications for SaaS products, business tools and small teams that need pragmatic delivery."
+title: "Youenn Le Gouedec, full-stack web developer"
+description: "I build and improve web applications: back-end systems, interfaces, integrations, deployment workflows and existing codebases. Based in Brittany, France."
 hero:
 about:
   title: "About Me"
   description: |
-    Since embarking on my self-taught development journey in 2024, I've primarily focused on Laravel and Vue. My toolkit also includes hands-on experience with Symfony and Docker, alongside explorations into Django. I thrive on experimenting with new technologies, contributing to open-source projects, and crafting elegant applications that deliver tangible value.
+    Since embarking on my self-taught development journey in 2024, I've focused on building practical products: SaaS applications, business tools, front-end interfaces, automations and deployments. I mostly work with Laravel, Vue, Nuxt, Symfony, Docker and lightweight infrastructure. I like understanding real needs, making hard-to-change code easier to evolve and shipping useful work without unnecessary complexity.
   items:
     - title: "Product context"
       description: "I start with the business need, users and constraints before deciding what the technical shape should be."
       icon: "i-lucide-scan-search"
-    - title: "Laravel, Vue, Nuxt"
-      description: "A stable primary stack for building quickly, keeping code maintainable and improving existing products."
+    - title: "Full-stack web development"
+      description: "Back end, front end, data, integrations and existing codebases with a stack chosen for maintainability."
       icon: "i-lucide-blocks"
     - title: "Pragmatic production"
       description: "Deployment, errors, performance, backups and small decisions that make an application more reliable."
       icon: "i-lucide-server-cog"
 services:
   title: "Freelance services"
-  description: "I help small teams build, improve and stabilize Laravel, Vue, Nuxt and SaaS applications."
+  description: "I help small teams build, improve and stabilize web applications: architecture, interfaces, product features, integrations and operations."
   items:
     - title: "Laravel development"
       description: "Back-end architecture, APIs, queues, billing, module rewrites and improvement work on existing codebases."
@@ -121,8 +121,8 @@ projects:
           color: "neutral"
           variant: "ghost"
 blog:
-  title: "Laravel, Nuxt and Infrastructure Notes"
-  description: "Short notes about architecture, technical choices and production details worth documenting."
+  title: "Full-stack, Product and Infrastructure Notes"
+  description: "Short notes about web development, product decisions, architecture and production details worth documenting."
 faq:
   title: Frequently Asked Questions
   description: Answers to common questions about my process and services.
@@ -131,7 +131,7 @@ faq:
       questions:
         - label: What services do you offer?
           content: |
-            I build web applications with Laravel, Vue and Nuxt. This includes back-end architecture, front-end interfaces, SaaS integrations, deployment systems and improving existing products.
+            I build full-stack web applications. This includes back-end architecture, front-end interfaces, SaaS features, integrations, deployment systems and improving existing products.
         - label: What is your process like?
           content: |
             I prefer a pragmatic and iterative process: understand the need, define the scope, ship in small steps, test what matters and keep communication clear during implementation.
