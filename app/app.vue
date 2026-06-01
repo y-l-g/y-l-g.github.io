@@ -10,12 +10,16 @@ import {
 const colorMode = useColorMode();
 const { locale } = useI18n();
 const localeHead = useLocaleHead({ seo: true });
+const route = useRoute();
 
 const color = computed(() =>
   colorMode.value === "dark" ? "#020618" : "white",
 );
 const uiLocale = computed(() =>
   locale.value === "fr" ? uiLocales.fr : uiLocales.en,
+);
+const isResumeRoute = computed(() =>
+  route.path === "/resume" || route.path === "/en/resume",
 );
 
 useHead(() => ({
@@ -48,12 +52,12 @@ useSeoMeta({
 
 <template>
   <UApp :locale="uiLocale">
-    <AppHeader />
+    <AppHeader v-if="!isResumeRoute" />
     <UMain>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
     </UMain>
-    <AppFooter />
+    <AppFooter v-if="!isResumeRoute" />
   </UApp>
 </template>
