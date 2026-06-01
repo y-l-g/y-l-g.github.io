@@ -191,7 +191,7 @@ const experiences: Experience[] = [
   {
     role: "Freelance Full-Stack Developer",
     company: "Youenn Le Gouedec",
-    period: "September 2024 - Present",
+    period: "2025 - Present",
     location: "Redon, France",
     bullets: [
       "Builds and maintains SaaS products, business tools and product interfaces with Laravel, Vue, Nuxt and Inertia.",
