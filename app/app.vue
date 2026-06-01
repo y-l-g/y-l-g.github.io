@@ -18,8 +18,9 @@ const color = computed(() =>
 const uiLocale = computed(() =>
   locale.value === "fr" ? uiLocales.fr : uiLocales.en,
 );
+const normalizedPath = computed(() => route.path.replace(/\/+$/, "") || "/");
 const isResumeRoute = computed(() =>
-  route.path === "/resume" || route.path === "/en/resume",
+  normalizedPath.value === "/resume" || normalizedPath.value === "/en/resume",
 );
 
 useHead(() => ({
