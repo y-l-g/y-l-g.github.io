@@ -39,7 +39,8 @@ export const personJsonLd = () => ({
   jobTitle: "Développeur web full-stack freelance",
   address: {
     "@type": "PostalAddress",
-    addressRegion: "Bretagne",
+    addressCity: "Redon",
+    addressRegion: "Brittany",
     addressCountry: "FR",
   },
   sameAs: [

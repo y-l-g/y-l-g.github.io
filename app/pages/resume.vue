@@ -70,6 +70,7 @@ type Link = {
   label: string;
   href: string;
   icon?: ResumeIconName;
+  iconClass?: string;
 };
 
 type SkillGroup = {
@@ -121,10 +122,11 @@ const contactLinks: Link[] = [
     label: "Malt",
     href: "https://www.malt.fr/profile/youennlegouedec",
     icon: "malt",
+    iconClass: "resume-icon-malt",
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/youenn-le-gouedec",
+    href: "https://www.linkedin.com/in/y-l-g/",
     icon: "linkedin",
   },
 ];
@@ -190,7 +192,7 @@ const experiences: Experience[] = [
     role: "Freelance Full-Stack Developer",
     company: "Youenn Le Gouedec",
     period: "September 2024 - Present",
-    location: "Brittany, France",
+    location: "Redon, France",
     bullets: [
       "Builds and maintains SaaS products, business tools and product interfaces with Laravel, Vue, Nuxt and Inertia.",
       "Owns full delivery paths: domain code, subscriptions, admin workflows, integrations, deployment and production follow-up.",
@@ -201,7 +203,7 @@ const experiences: Experience[] = [
     role: "Digital Support & IT Services",
     company: "France Services / SAP Informatique",
     period: "2021 - 2025",
-    location: "Pays de Redon, France",
+    location: "Redon, France",
     bullets: [
       "Helped individuals and local organizations solve practical software, hardware, administrative and training needs.",
       "Built strong client-facing habits: clear explanations, diagnosis, documentation and pragmatic support.",
@@ -246,10 +248,11 @@ const projects: Project[] = [
     href: "https://y-l.fr",
   },
   {
-    name: "n8n workflow backups",
+    name: "Pogo Async",
     description:
-      "Repository-backed workflow history and restore process for n8n, separated from Kubernetes manifests and runtime secrets.",
-    stack: "n8n, Git, Kubernetes, automation",
+      "Composer package and FrankenPHP module for request-scoped parallel PHP jobs using isolated worker pools.",
+    stack: "PHP, FrankenPHP, Go, Caddy, Composer",
+    href: "https://github.com/y-l-g/pogo",
   },
 ];
 
@@ -300,8 +303,12 @@ useHead({
 </script>
 
 <template>
-  <main class="resume-page min-h-screen bg-muted py-6 text-default print:bg-white print:py-0">
-    <div class="mx-auto flex w-full max-w-5xl justify-end px-4 pb-4 print:hidden">
+  <main
+    class="resume-page min-h-screen bg-muted py-6 text-default print:bg-white print:py-0"
+  >
+    <div
+      class="mx-auto flex w-full max-w-5xl justify-end px-4 pb-4 print:hidden"
+    >
       <UButton
         color="neutral"
         variant="outline"
@@ -314,34 +321,37 @@ useHead({
     <article
       class="resume-sheet mx-auto w-full max-w-5xl bg-default px-6 py-7 shadow-sm ring ring-default sm:px-8 lg:px-10 print:max-w-none print:p-0 print:shadow-none print:ring-0"
     >
-      <header class="resume-header grid gap-5 border-b border-muted pb-5 sm:grid-cols-[1fr_auto]">
+      <header
+        class="resume-header grid gap-5 border-b border-muted pb-5 sm:grid-cols-[1fr_auto]"
+      >
         <div>
           <p class="text-sm font-medium text-primary">
             Full-stack web developer
           </p>
-          <h1 class="mt-1 text-3xl font-semibold tracking-normal text-highlighted">
+          <h1
+            class="mt-1 text-3xl font-semibold tracking-normal text-highlighted"
+          >
             Youenn Le Gouedec
           </h1>
           <p class="mt-3 max-w-3xl text-sm leading-6 text-toned">
-            Laravel, Vue and Nuxt developer based in Brittany, France. I build
-            and maintain SaaS products and business tools, from backend domain
-            code and subscriptions to front-end interfaces, integrations,
-            deployment workflows and production follow-up.
+            Laravel, Vue and Nuxt developer based in Redon, France. I build and
+            maintain SaaS products and business tools, from backend domain code
+            and subscriptions to front-end interfaces, integrations, deployment
+            workflows and production follow-up.
           </p>
         </div>
 
         <div class="flex items-start gap-4 sm:flex-col sm:items-end">
           <NuxtImg
-            src="/profile.png"
+            src="/8fdc0794-1657-4f9e-913e-c8997e5cddb2.webp"
             alt="Portrait of Youenn Le Gouedec"
             width="112"
             height="112"
             class="size-24 rounded-lg object-cover ring ring-default sm:size-28 print:size-24"
-            format="webp"
           />
           <div class="flex items-center gap-1 text-sm text-toned">
             <ResumeIcon name="map-pin" class="size-4 text-primary" />
-            <span>Brittany, France</span>
+            <span>Redon, France</span>
           </div>
         </div>
       </header>
@@ -361,6 +371,7 @@ useHead({
             v-if="link.icon"
             :name="link.icon"
             class="size-4 shrink-0 text-primary"
+            :class="link.iconClass"
           />
           <span class="truncate">{{ link.label }}</span>
         </a>
@@ -369,9 +380,7 @@ useHead({
       <div class="resume-body grid gap-6 pt-5 lg:grid-cols-[1fr_2fr]">
         <aside class="resume-sidebar space-y-6">
           <section>
-            <h2 class="resume-section-title">
-              Core Skills
-            </h2>
+            <h2 class="resume-section-title">Core Skills</h2>
             <div class="mt-3 space-y-4">
               <div v-for="group in skillGroups" :key="group.title">
                 <h3 class="text-sm font-semibold text-highlighted">
@@ -394,9 +403,7 @@ useHead({
           </section>
 
           <section>
-            <h2 class="resume-section-title">
-              Education
-            </h2>
+            <h2 class="resume-section-title">Education</h2>
             <ul class="mt-3 space-y-2 text-sm leading-5 text-toned">
               <li v-for="item in education" :key="item">
                 {{ item }}
@@ -405,9 +412,7 @@ useHead({
           </section>
 
           <section>
-            <h2 class="resume-section-title">
-              Languages
-            </h2>
+            <h2 class="resume-section-title">Languages</h2>
             <ul class="mt-3 space-y-2 text-sm leading-5 text-toned">
               <li>French: native</li>
               <li>English: professional working proficiency</li>
@@ -417,16 +422,16 @@ useHead({
 
         <div class="resume-main space-y-6">
           <section>
-            <h2 class="resume-section-title">
-              Experience
-            </h2>
+            <h2 class="resume-section-title">Experience</h2>
             <div class="mt-3 space-y-4">
               <article
                 v-for="experience in experiences"
                 :key="`${experience.company}-${experience.role}`"
                 class="break-inside-avoid"
               >
-                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <div
+                  class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1"
+                >
                   <div>
                     <h3 class="text-base font-semibold text-highlighted">
                       {{ experience.role }}
@@ -452,9 +457,7 @@ useHead({
           </section>
 
           <section>
-            <h2 class="resume-section-title">
-              Selected Projects
-            </h2>
+            <h2 class="resume-section-title">Selected Projects</h2>
             <div class="resume-projects mt-3 grid gap-3 sm:grid-cols-2">
               <article
                 v-for="project in projects"
@@ -514,6 +517,13 @@ useHead({
   flex: 0 0 auto;
   height: 1rem;
   width: 1rem;
+}
+
+.resume-icon-malt {
+  height: 1.75rem;
+  margin-left: -0.35rem;
+  margin-right: -0.15rem;
+  width: 1.75rem;
 }
 
 @media print {
@@ -598,11 +608,13 @@ useHead({
     display: grid;
     gap: 0.55rem !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    padding-right: 0.1rem !important;
   }
 
   .resume-project-card {
-    border-color: #d4d4d8 !important;
+    border-color: transparent !important;
     border-radius: 0.45rem !important;
+    box-shadow: inset 0 0 0 1px #d4d4d8 !important;
     padding: 0.6rem !important;
   }
 
@@ -625,6 +637,11 @@ useHead({
     color: currentColor;
     height: 1rem;
     width: 1rem;
+  }
+
+  .resume-icon-malt {
+    height: 1.75rem;
+    width: 1.75rem;
   }
 }
 </style>
