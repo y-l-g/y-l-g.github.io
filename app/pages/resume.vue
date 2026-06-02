@@ -93,11 +93,35 @@ type Project = {
   href?: string;
 };
 
-const title = "Full-Stack Developer Resume";
-const description =
-  "Resume of Youenn Le Gouedec, full-stack web developer specializing in Laravel, Vue, Nuxt, SaaS products and pragmatic production infrastructure.";
+type ResumeContent = {
+  seoTitle: string;
+  seoDescription: string;
+  jsonLdName: string;
+  jsonLdJobTitle: string;
+  printLabel: string;
+  contactAriaLabel: string;
+  role: string;
+  name: string;
+  summary: string;
+  portraitAlt: string;
+  location: string;
+  openProjectLabel: string;
+  sectionTitles: {
+    skills: string;
+    education: string;
+    languages: string;
+    experience: string;
+    projects: string;
+  };
+  contactLinks: Link[];
+  skillGroups: SkillGroup[];
+  experiences: Experience[];
+  projects: Project[];
+  education: string[];
+  languages: string[];
+};
 
-const contactLinks: Link[] = [
+const sharedContactLinks: Link[] = [
   {
     label: "youenn.legouedec@gmail.com",
     href: "mailto:youenn.legouedec@gmail.com",
@@ -131,175 +155,369 @@ const contactLinks: Link[] = [
   },
 ];
 
-const skillGroups: SkillGroup[] = [
-  {
-    title: "Backend",
-    items: [
-      "Laravel",
-      "PHP",
-      "Symfony",
-      "PostgreSQL",
-      "Redis",
-      "Queues",
-      "Webhooks",
-      "Stripe Cashier",
-      "Filament",
-    ],
-  },
-  {
-    title: "Frontend",
-    items: [
-      "Vue",
-      "Nuxt",
-      "Inertia.js",
-      "TypeScript",
-      "Nuxt UI",
-      "Tailwind CSS",
-      "SSR",
-      "Forms",
-      "Product UI",
-    ],
-  },
-  {
-    title: "Production",
-    items: [
-      "Docker",
-      "Caddy",
-      "FrankenPHP",
-      "Traefik",
-      "k3s",
-      "Argo CD",
-      "GitOps",
-      "Backups",
-      "Health checks",
-    ],
-  },
-];
-
-const experiences: Experience[] = [
-  {
-    role: "Full-Stack Web Developer",
-    company: "Karbonalpha",
-    period: "March 2026 - April 2026",
-    location: "Remote mission",
-    bullets: [
-      "Worked in a complex multi-tenant Laravel architecture for insurance workflows.",
-      "Implemented backend features around contracts, affiliation and budget management.",
-      "Integrated Nuxt/Vue screens with API-connected customer and employee areas.",
-    ],
-  },
-  {
-    role: "Freelance Full-Stack Developer",
-    company: "Youenn Le Gouedec",
-    period: "2025 - Present",
+const resumeContent: Record<"fr" | "en", ResumeContent> = {
+  fr: {
+    seoTitle: "CV développeur web full-stack",
+    seoDescription:
+      "CV de Youenn Le Gouedec, développeur web full-stack spécialisé Laravel, Vue, Nuxt, produits SaaS et infrastructure de production pragmatique.",
+    jsonLdName: `${siteName} CV`,
+    jsonLdJobTitle: "Développeur web full-stack",
+    printLabel: "Imprimer / Enregistrer en PDF",
+    contactAriaLabel: "Liens de contact",
+    role: "Développeur web full-stack",
+    name: "Youenn Le Gouedec",
+    summary:
+      "Développeur Laravel, Vue et Nuxt basé à Redon. Je construis et maintiens des produits SaaS et outils métier, du code métier back-end et des abonnements jusqu'aux interfaces, intégrations, déploiements et suivi de production.",
+    portraitAlt: "Portrait de Youenn Le Gouedec",
     location: "Redon, France",
-    bullets: [
-      "Builds and maintains SaaS products, business tools and product interfaces with Laravel, Vue, Nuxt and Inertia.",
-      "Owns full delivery paths: domain code, subscriptions, admin workflows, integrations, deployment and production follow-up.",
-      "Maintains lightweight infrastructure using Docker, Kubernetes/GitOps, Argo CD, PostgreSQL, Redis and backups.",
+    openProjectLabel: "Ouvrir",
+    sectionTitles: {
+      skills: "Compétences",
+      education: "Formation",
+      languages: "Langues",
+      experience: "Expérience",
+      projects: "Projets sélectionnés",
+    },
+    contactLinks: sharedContactLinks,
+    skillGroups: [
+      {
+        title: "Backend",
+        items: [
+          "Laravel",
+          "PHP",
+          "Symfony",
+          "PostgreSQL",
+          "Redis",
+          "Files d'attente",
+          "Webhooks",
+          "Stripe Cashier",
+          "Filament",
+        ],
+      },
+      {
+        title: "Frontend",
+        items: [
+          "Vue",
+          "Nuxt",
+          "Inertia.js",
+          "TypeScript",
+          "Nuxt UI",
+          "Tailwind CSS",
+          "SSR",
+          "Formulaires",
+          "UI produit",
+        ],
+      },
+      {
+        title: "Production",
+        items: [
+          "Docker",
+          "Caddy",
+          "FrankenPHP",
+          "Traefik",
+          "k3s",
+          "Argo CD",
+          "GitOps",
+          "Sauvegardes",
+          "Health checks",
+        ],
+      },
+    ],
+    experiences: [
+      {
+        role: "Développeur web full-stack",
+        company: "Karbonalpha",
+        period: "mars 2026 - avril 2026",
+        location: "Mission à distance",
+        bullets: [
+          "Intervention dans une architecture Laravel multi-tenant complexe pour des parcours assurance.",
+          "Développement back-end autour des contrats, affiliations et budgets.",
+          "Intégration d'écrans Nuxt/Vue connectés aux espaces client et salarié.",
+        ],
+      },
+      {
+        role: "Développeur full-stack freelance",
+        company: "Youenn Le Gouedec",
+        period: "2025 - aujourd'hui",
+        location: "Redon, France",
+        bullets: [
+          "Conception et maintenance de produits SaaS, outils métier et interfaces avec Laravel, Vue, Nuxt et Inertia.",
+          "Prise en charge de parcours complets : domaine métier, abonnements, administration, intégrations, déploiement et suivi production.",
+          "Infrastructure légère avec Docker, Kubernetes/GitOps, Argo CD, PostgreSQL, Redis et sauvegardes.",
+        ],
+      },
+      {
+        role: "Support numérique et services informatiques",
+        company: "France Services / SAP Informatique",
+        period: "2021 - 2025",
+        location: "Redon, France",
+        bullets: [
+          "Aide aux particuliers et structures locales sur des besoins logiciels, matériels, administratifs et de formation.",
+          "Habitudes solides de diagnostic, explication claire, documentation et support pragmatique.",
+        ],
+      },
+    ],
+    projects: [
+      {
+        name: "Webvite",
+        description:
+          "SaaS en production pour petites entreprises : abonnements, sites clients, domaines, analytics, administration et maintenance.",
+        stack: "Laravel, Vue, SaaS, paiements, production",
+        href: "https://webvite.eu",
+      },
+      {
+        name: "Saasterkit",
+        description:
+          "Starter kit SaaS open source Laravel/Vue/Inertia avec authentification, équipes, rôles, facturation, administration et thème.",
+        stack: "Laravel, Vue, Inertia, Nuxt UI, Stripe",
+        href: "https://github.com/y-l-g/saasterkit",
+      },
+      {
+        name: "Notenn",
+        description:
+          "Application musicale pour organiser, éditer, rendre et partager des partitions, avec interface multilingue et recherche PostgreSQL.",
+        stack: "Laravel, Vue, Inertia, PostgreSQL, Docker",
+        href: "https://notenn.com",
+      },
+      {
+        name: "Pogo WebSocket",
+        description:
+          "Module WebSocket expérimental compatible Pusher pour FrankenPHP et Laravel broadcasting, autour des contraintes temps réel en PHP.",
+        stack: "Go, PHP, FrankenPHP, WebSocket, Redis",
+        href: "https://github.com/y-l-g/websocket",
+      },
+      {
+        name: "y-l.fr & notes techniques",
+        description:
+          "Portfolio personnel et notes sur Laravel, Nuxt, architecture SaaS, GitOps, k3s et décisions de production.",
+        stack: "Nuxt, Nuxt Content, Nuxt UI, SEO",
+        href: "https://y-l.fr",
+      },
+      {
+        name: "Pogo Async",
+        description:
+          "Package Composer et module FrankenPHP pour exécuter des jobs PHP parallèles dans des pools de workers isolés.",
+        stack: "PHP, FrankenPHP, Go, Caddy, Composer",
+        href: "https://github.com/y-l-g/pogo",
+      },
+    ],
+    education: [
+      "Licence de mathématiques, Université Rennes 1, 2013",
+      "Formation d'ingénieur, INSA Rennes, 2009-2011",
+      "Baccalauréat S, mention très bien, Lycée Charles de Gaulle, Vannes, 2009",
+    ],
+    languages: [
+      "Français : langue maternelle",
+      "Anglais : usage professionnel",
     ],
   },
-  {
-    role: "Digital Support & IT Services",
-    company: "France Services / SAP Informatique",
-    period: "2021 - 2025",
+  en: {
+    seoTitle: "Full-Stack Developer Resume",
+    seoDescription:
+      "Resume of Youenn Le Gouedec, full-stack web developer specializing in Laravel, Vue, Nuxt, SaaS products and pragmatic production infrastructure.",
+    jsonLdName: `${siteName} Resume`,
+    jsonLdJobTitle: "Full-stack web developer",
+    printLabel: "Print / Save PDF",
+    contactAriaLabel: "Contact links",
+    role: "Full-stack web developer",
+    name: "Youenn Le Gouedec",
+    summary:
+      "Laravel, Vue and Nuxt developer based in Redon, France. I build and maintain SaaS products and business tools, from backend domain code and subscriptions to front-end interfaces, integrations, deployment workflows and production follow-up.",
+    portraitAlt: "Portrait of Youenn Le Gouedec",
     location: "Redon, France",
-    bullets: [
-      "Helped individuals and local organizations solve practical software, hardware, administrative and training needs.",
-      "Built strong client-facing habits: clear explanations, diagnosis, documentation and pragmatic support.",
+    openProjectLabel: "Open",
+    sectionTitles: {
+      skills: "Core Skills",
+      education: "Education",
+      languages: "Languages",
+      experience: "Experience",
+      projects: "Selected Projects",
+    },
+    contactLinks: sharedContactLinks,
+    skillGroups: [
+      {
+        title: "Backend",
+        items: [
+          "Laravel",
+          "PHP",
+          "Symfony",
+          "PostgreSQL",
+          "Redis",
+          "Queues",
+          "Webhooks",
+          "Stripe Cashier",
+          "Filament",
+        ],
+      },
+      {
+        title: "Frontend",
+        items: [
+          "Vue",
+          "Nuxt",
+          "Inertia.js",
+          "TypeScript",
+          "Nuxt UI",
+          "Tailwind CSS",
+          "SSR",
+          "Forms",
+          "Product UI",
+        ],
+      },
+      {
+        title: "Production",
+        items: [
+          "Docker",
+          "Caddy",
+          "FrankenPHP",
+          "Traefik",
+          "k3s",
+          "Argo CD",
+          "GitOps",
+          "Backups",
+          "Health checks",
+        ],
+      },
+    ],
+    experiences: [
+      {
+        role: "Full-Stack Web Developer",
+        company: "Karbonalpha",
+        period: "March 2026 - April 2026",
+        location: "Remote mission",
+        bullets: [
+          "Worked in a complex multi-tenant Laravel architecture for insurance workflows.",
+          "Implemented backend features around contracts, affiliation and budget management.",
+          "Integrated Nuxt/Vue screens with API-connected customer and employee areas.",
+        ],
+      },
+      {
+        role: "Freelance Full-Stack Developer",
+        company: "Youenn Le Gouedec",
+        period: "2025 - Present",
+        location: "Redon, France",
+        bullets: [
+          "Builds and maintains SaaS products, business tools and product interfaces with Laravel, Vue, Nuxt and Inertia.",
+          "Owns full delivery paths: domain code, subscriptions, admin workflows, integrations, deployment and production follow-up.",
+          "Maintains lightweight infrastructure using Docker, Kubernetes/GitOps, Argo CD, PostgreSQL, Redis and backups.",
+        ],
+      },
+      {
+        role: "Digital Support & IT Services",
+        company: "France Services / SAP Informatique",
+        period: "2021 - 2025",
+        location: "Redon, France",
+        bullets: [
+          "Helped individuals and local organizations solve practical software, hardware, administrative and training needs.",
+          "Built strong client-facing habits: clear explanations, diagnosis, documentation and pragmatic support.",
+        ],
+      },
+    ],
+    projects: [
+      {
+        name: "Webvite",
+        description:
+          "Production SaaS for small businesses with subscriptions, customer websites, custom domains, analytics, administration and ongoing maintenance.",
+        stack: "Laravel, Vue, SaaS, payments, production",
+        href: "https://webvite.eu",
+      },
+      {
+        name: "Saasterkit",
+        description:
+          "Open-source Laravel/Vue/Inertia SaaS starter kit with authentication, teams, roles, billing, administration and theming.",
+        stack: "Laravel, Vue, Inertia, Nuxt UI, Stripe",
+        href: "https://github.com/y-l-g/saasterkit",
+      },
+      {
+        name: "Notenn",
+        description:
+          "Music web application for organizing, editing, rendering and sharing scores, with multilingual UI and PostgreSQL search.",
+        stack: "Laravel, Vue, Inertia, PostgreSQL, Docker",
+        href: "https://notenn.com",
+      },
+      {
+        name: "Pogo WebSocket",
+        description:
+          "Experimental Pusher-compatible WebSocket module for FrankenPHP and Laravel broadcasting, focused on real-time PHP constraints.",
+        stack: "Go, PHP, FrankenPHP, WebSocket, Redis",
+        href: "https://github.com/y-l-g/websocket",
+      },
+      {
+        name: "y-l.fr & technical writing",
+        description:
+          "Personal portfolio and notes about Laravel, Nuxt, SaaS architecture, GitOps, k3s and production decisions.",
+        stack: "Nuxt, Nuxt Content, Nuxt UI, SEO",
+        href: "https://y-l.fr",
+      },
+      {
+        name: "Pogo Async",
+        description:
+          "Composer package and FrankenPHP module for request-scoped parallel PHP jobs using isolated worker pools.",
+        stack: "PHP, FrankenPHP, Go, Caddy, Composer",
+        href: "https://github.com/y-l-g/pogo",
+      },
+    ],
+    education: [
+      "Bachelor's degree in Mathematics, Universite de Rennes 1, 2013",
+      "Engineering studies, INSA Rennes, 2009-2011",
+      "Baccalaureat S, highest honors, Lycee Charles de Gaulle, Vannes, 2009",
+    ],
+    languages: [
+      "French: native",
+      "English: professional working proficiency",
     ],
   },
-];
+};
 
-const projects: Project[] = [
-  {
-    name: "Webvite",
-    description:
-      "Production SaaS for small businesses with subscriptions, customer websites, custom domains, analytics, administration and ongoing maintenance.",
-    stack: "Laravel, Vue, SaaS, payments, production",
-    href: "https://webvite.eu",
-  },
-  {
-    name: "Saasterkit",
-    description:
-      "Open-source Laravel/Vue/Inertia SaaS starter kit with authentication, teams, roles, billing, administration and theming.",
-    stack: "Laravel, Vue, Inertia, Nuxt UI, Stripe",
-    href: "https://github.com/y-l-g/saasterkit",
-  },
-  {
-    name: "Notenn",
-    description:
-      "Music web application for organizing, editing, rendering and sharing scores, with multilingual UI and PostgreSQL search.",
-    stack: "Laravel, Vue, Inertia, PostgreSQL, Docker",
-    href: "https://notenn.com",
-  },
-  {
-    name: "Pogo WebSocket",
-    description:
-      "Experimental Pusher-compatible WebSocket module for FrankenPHP and Laravel broadcasting, focused on real-time PHP constraints.",
-    stack: "Go, PHP, FrankenPHP, WebSocket, Redis",
-    href: "https://github.com/y-l-g/websocket",
-  },
-  {
-    name: "y-l.fr & technical writing",
-    description:
-      "Personal portfolio and notes about Laravel, Nuxt, SaaS architecture, GitOps, k3s and production decisions.",
-    stack: "Nuxt, Nuxt Content, Nuxt UI, SEO",
-    href: "https://y-l.fr",
-  },
-  {
-    name: "Pogo Async",
-    description:
-      "Composer package and FrankenPHP module for request-scoped parallel PHP jobs using isolated worker pools.",
-    stack: "PHP, FrankenPHP, Go, Caddy, Composer",
-    href: "https://github.com/y-l-g/pogo",
-  },
-];
-
-const education = [
-  "Bachelor's degree in Mathematics, Universite de Rennes 1, 2013",
-  "Engineering studies, INSA Rennes, 2009-2011",
-  "Baccalaureat S, highest honors, Lycee Charles de Gaulle, Vannes, 2009",
-];
+const { locale } = useI18n();
+const resumeLocale = computed<"fr" | "en">(() =>
+  locale.value === DEFAULT_LOCALE ? "fr" : "en",
+);
+const resume = computed(() => resumeContent[resumeLocale.value]);
+const canonicalPath = computed(() => getLocalizedContentPath("/resume", locale.value));
+const title = computed(() => resume.value.seoTitle);
+const description = computed(() => resume.value.seoDescription);
+const sameAs = computed(() =>
+  resume.value.contactLinks
+    .map((link) => link.href)
+    .filter((href) => href.startsWith("https://")),
+);
 
 const printResume = () => window.print();
 
 useSeoMeta({
   title,
-  ogTitle: `${siteName} - ${title}`,
+  ogTitle: computed(() => `${siteName} - ${title.value}`),
   description,
   ogDescription: description,
   ogType: "profile",
-  ogUrl: withSiteUrl("/resume"),
+  ogUrl: computed(() => withSiteUrl(canonicalPath.value)),
   ogImage: defaultSeoImage,
   ogImageWidth: defaultSeoImageWidth,
   ogImageHeight: defaultSeoImageHeight,
   twitterImage: defaultSeoImage,
 });
 
-useHead({
+useHead(() => ({
   script: [
     jsonLdScript({
       "@context": "https://schema.org",
       "@type": "ProfilePage",
-      name: `${siteName} Resume`,
-      url: withSiteUrl("/resume"),
-      description,
+      name: resume.value.jsonLdName,
+      url: withSiteUrl(canonicalPath.value),
+      description: description.value,
       mainEntity: {
         "@type": "Person",
         name: siteName,
-        jobTitle: "Full-stack web developer",
+        jobTitle: resume.value.jsonLdJobTitle,
         email: "mailto:youenn.legouedec@gmail.com",
         telephone: "+33619465867",
         image: defaultSeoImage,
         url: withSiteUrl("/"),
-        sameAs: contactLinks
-          .map((link) => link.href)
-          .filter((href) => href.startsWith("https://")),
+        sameAs: sameAs.value,
       },
     }),
   ],
-});
+}));
 </script>
 
 <template>
@@ -313,7 +531,7 @@ useHead({
         color="neutral"
         variant="outline"
         icon="i-lucide-printer"
-        label="Print / Save PDF"
+        :label="resume.printLabel"
         @click="printResume"
       />
     </div>
@@ -326,42 +544,39 @@ useHead({
       >
         <div>
           <p class="text-sm font-medium text-primary">
-            Full-stack web developer
+            {{ resume.role }}
           </p>
           <h1
             class="mt-1 text-3xl font-semibold tracking-normal text-highlighted"
           >
-            Youenn Le Gouedec
+            {{ resume.name }}
           </h1>
           <p class="mt-3 max-w-3xl text-sm leading-6 text-toned">
-            Laravel, Vue and Nuxt developer based in Redon, France. I build and
-            maintain SaaS products and business tools, from backend domain code
-            and subscriptions to front-end interfaces, integrations, deployment
-            workflows and production follow-up.
+            {{ resume.summary }}
           </p>
         </div>
 
         <div class="flex items-start gap-4 sm:flex-col sm:items-end">
           <NuxtImg
             src="/8fdc0794-1657-4f9e-913e-c8997e5cddb2.webp"
-            alt="Portrait of Youenn Le Gouedec"
+            :alt="resume.portraitAlt"
             width="112"
             height="112"
             class="size-24 rounded-lg object-cover ring ring-default sm:size-28 print:size-24"
           />
           <div class="flex items-center gap-1 text-sm text-toned">
             <ResumeIcon name="map-pin" class="size-4 text-primary" />
-            <span>Redon, France</span>
+            <span>{{ resume.location }}</span>
           </div>
         </div>
       </header>
 
       <section
-        aria-label="Contact links"
+        :aria-label="resume.contactAriaLabel"
         class="resume-contact grid gap-2 border-b border-muted py-4 text-sm sm:grid-cols-2 lg:grid-cols-3"
       >
         <a
-          v-for="link in contactLinks"
+          v-for="link in resume.contactLinks"
           :key="link.href"
           :href="link.href"
           class="flex min-w-0 items-center gap-2 text-toned transition-colors hover:text-default"
@@ -380,9 +595,11 @@ useHead({
       <div class="resume-body grid gap-6 pt-5 lg:grid-cols-[1fr_2fr]">
         <aside class="resume-sidebar space-y-6">
           <section>
-            <h2 class="resume-section-title">Core Skills</h2>
+            <h2 class="resume-section-title">
+              {{ resume.sectionTitles.skills }}
+            </h2>
             <div class="mt-3 space-y-4">
-              <div v-for="group in skillGroups" :key="group.title">
+              <div v-for="group in resume.skillGroups" :key="group.title">
                 <h3 class="text-sm font-semibold text-highlighted">
                   {{ group.title }}
                 </h3>
@@ -403,29 +620,36 @@ useHead({
           </section>
 
           <section>
-            <h2 class="resume-section-title">Education</h2>
+            <h2 class="resume-section-title">
+              {{ resume.sectionTitles.education }}
+            </h2>
             <ul class="mt-3 space-y-2 text-sm leading-5 text-toned">
-              <li v-for="item in education" :key="item">
+              <li v-for="item in resume.education" :key="item">
                 {{ item }}
               </li>
             </ul>
           </section>
 
           <section>
-            <h2 class="resume-section-title">Languages</h2>
+            <h2 class="resume-section-title">
+              {{ resume.sectionTitles.languages }}
+            </h2>
             <ul class="mt-3 space-y-2 text-sm leading-5 text-toned">
-              <li>French: native</li>
-              <li>English: professional working proficiency</li>
+              <li v-for="item in resume.languages" :key="item">
+                {{ item }}
+              </li>
             </ul>
           </section>
         </aside>
 
         <div class="resume-main space-y-6">
           <section>
-            <h2 class="resume-section-title">Experience</h2>
+            <h2 class="resume-section-title">
+              {{ resume.sectionTitles.experience }}
+            </h2>
             <div class="mt-3 space-y-4">
               <article
-                v-for="experience in experiences"
+                v-for="experience in resume.experiences"
                 :key="`${experience.company}-${experience.role}`"
                 class="break-inside-avoid"
               >
@@ -457,10 +681,12 @@ useHead({
           </section>
 
           <section>
-            <h2 class="resume-section-title">Selected Projects</h2>
+            <h2 class="resume-section-title">
+              {{ resume.sectionTitles.projects }}
+            </h2>
             <div class="resume-projects mt-3 grid gap-3 sm:grid-cols-2">
               <article
-                v-for="project in projects"
+                v-for="project in resume.projects"
                 :key="project.name"
                 class="resume-project-card break-inside-avoid rounded-lg border border-muted p-3"
               >
@@ -472,7 +698,7 @@ useHead({
                     v-if="project.href"
                     :href="project.href"
                     class="mt-0.5 text-primary"
-                    :aria-label="`Open ${project.name}`"
+                    :aria-label="`${resume.openProjectLabel} ${project.name}`"
                     rel="noopener noreferrer"
                   >
                     <ResumeIcon name="external-link" class="size-4" />
@@ -546,7 +772,7 @@ useHead({
     --ui-bg-muted: #ffffff;
     --ui-border: #d4d4d8;
     --ui-border-muted: #e4e4e7;
-    --ui-primary: #1d4ed8;
+    --ui-primary: #c2410c;
     --ui-text: #18181b;
     --ui-text-highlighted: #09090b;
     --ui-text-muted: #71717a;
