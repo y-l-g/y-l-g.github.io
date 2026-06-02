@@ -23,8 +23,6 @@ const items = computed<AccordionItem[]>(() =>
     :description="page.faq.description"
     layout="split"
   >
-    <div class="rounded-lg bg-elevated/30 px-3 ring ring-default">
-      <UAccordion :items="items" />
-    </div>
+    <UAccordion :items="items" />
   </LandingSection>
 </template>

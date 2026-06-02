@@ -168,25 +168,15 @@ useHead(() => ({
           <UPageCard
             v-for="(step, index) in page.process"
             :key="step.title"
-            variant="subtle"
+            variant="soft"
+            spotlight
+            spotlight-color="primary"
             :title="`${index + 1}. ${step.title}`"
             :description="step.description"
-          />
-        </div>
-      </UPageSection>
-
-      <UPageSection
-        :title="locale === DEFAULT_LOCALE ? 'Preuves concrètes' : 'Relevant proof'"
-        orientation="vertical"
-        :ui="{ container: 'py-10 sm:py-14 lg:py-16' }"
-      >
-        <div class="grid gap-4 sm:grid-cols-3">
-          <UPageCard
-            v-for="item in page.proof"
-            :key="item.title"
-            variant="naked"
-            :title="item.title"
-            :description="item.description"
+            :ui="{
+              root: 'overflow-hidden before:inset-0 before:opacity-[0.14]',
+              spotlight: 'hidden',
+            }"
           />
         </div>
       </UPageSection>

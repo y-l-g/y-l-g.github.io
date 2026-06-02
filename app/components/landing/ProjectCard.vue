@@ -18,14 +18,20 @@ defineProps<{
 
 <template>
   <UPageCard
-    variant="subtle"
-    class="h-full transition duration-200 hover:-translate-y-0.5"
+    variant="soft"
+    spotlight
+    spotlight-color="primary"
+    class="h-full"
     :ui="{
+      root: 'overflow-hidden before:inset-0 before:opacity-[0.14]',
+      spotlight: 'hidden',
       container: 'flex h-full flex-col gap-5 p-5 sm:p-6',
     }"
   >
     <div class="space-y-3">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+      <div
+        class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
+      >
         <h3 class="text-lg font-semibold text-highlighted text-pretty">
           {{ title }}
         </h3>

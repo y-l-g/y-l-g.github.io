@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const { t } = useI18n();
+const { locale, t } = useI18n();
 const year = new Date().getFullYear();
 const { footer } = useAppConfig();
+const resumePath = computed(() => getLocalizedContentPath("/resume", locale.value));
 
 const getSocialLabel = (to: string) => {
   if (to.includes("github.com")) {
@@ -90,9 +91,17 @@ const columns = computed(() => [
       </UContainer>
     </template>
     <template #left>
-      <p class="text-muted text-sm">
-        {{ t("footer.credits", { year }) }}
-      </p>
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
+        <p>
+          {{ t("footer.credits", { year }) }}
+        </p>
+        <ULink
+          :to="resumePath"
+          class="font-medium text-muted hover:text-primary"
+        >
+          {{ t("footer.resume") }}
+        </ULink>
+      </div>
     </template>
 
     <template #right>

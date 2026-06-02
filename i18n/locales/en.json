@@ -20,6 +20,7 @@
   },
   "footer": {
     "credits": "Built with Nuxt • {year}",
+    "resume": "Resume",
     "columns": {
       "backend": "Backend",
       "frontend": "Frontend",

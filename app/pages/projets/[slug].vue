@@ -117,52 +117,44 @@ useHead(() => ({
       </UPageSection>
 
       <UPageSection
-        :title="locale === DEFAULT_LOCALE ? 'Résultats' : 'Outcomes'"
+        :title="locale === DEFAULT_LOCALE ? 'Le projet' : 'The Project'"
         orientation="vertical"
         :ui="{ container: 'py-10 sm:py-14 lg:py-16' }"
       >
-        <div class="grid gap-4 sm:grid-cols-3">
-          <UPageCard
-            v-for="outcome in page.outcomes"
-            :key="outcome"
-            variant="subtle"
-            icon="i-lucide-check-circle"
-            :title="outcome"
-          />
-        </div>
-      </UPageSection>
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          <div class="space-y-3">
+            <div
+              v-for="outcome in page.outcomes"
+              :key="outcome"
+              class="flex gap-3 rounded-lg bg-elevated/40 p-4"
+            >
+              <UIcon
+                name="i-lucide-check-circle"
+                class="mt-0.5 size-5 shrink-0 text-primary"
+              />
+              <p class="text-sm leading-6 text-toned text-pretty">
+                {{ outcome }}
+              </p>
+            </div>
+          </div>
 
-      <UPageSection
-        :title="locale === DEFAULT_LOCALE ? 'Ce que le projet montre' : 'What the project shows'"
-        orientation="vertical"
-        :ui="{ container: 'py-10 sm:py-14 lg:py-16' }"
-      >
-        <div class="grid gap-5">
-          <UPageCard
-            v-for="item in page.body"
-            :key="item.title"
-            variant="naked"
-            :title="item.title"
-            :description="item.description"
-          />
-        </div>
-      </UPageSection>
-
-      <UPageSection
-        :title="locale === DEFAULT_LOCALE ? 'Services associés' : 'Related services'"
-        orientation="vertical"
-        :ui="{ container: 'py-10 sm:py-14 lg:py-16' }"
-      >
-        <div class="flex flex-wrap gap-3">
-          <UButton
-            v-for="service in page.relatedServices"
-            :key="service.to"
-            :label="service.label"
-            :to="service.to"
-            color="neutral"
-            variant="subtle"
-            trailing-icon="i-lucide-arrow-right"
-          />
+          <div class="grid gap-4">
+            <UPageCard
+              v-for="item in page.body"
+              :key="item.title"
+              variant="soft"
+              spotlight
+              spotlight-color="primary"
+              :title="item.title"
+              :description="item.description"
+              :ui="{
+                root: 'overflow-hidden before:inset-0 before:opacity-[0.14]',
+                spotlight: 'hidden',
+                container: 'p-5 sm:p-6',
+                description: 'text-base leading-7 text-muted',
+              }"
+            />
+          </div>
         </div>
       </UPageSection>
     </UPage>
