@@ -14,6 +14,15 @@ import {
 const route = useRoute();
 const { locale, t } = useI18n();
 const { global } = useAppConfig();
+
+definePageMeta({
+  validate: (route) => {
+    const slug = route.params.slug;
+
+    return typeof slug === "string" && !slug.includes(".");
+  },
+});
+
 const contentPath = computed(() =>
   getLocalizedContentPath(`/services/${route.params.slug}`, locale.value),
 );
@@ -26,7 +35,6 @@ if (!page.value) {
   throw createError({
     statusCode: 404,
     statusMessage: "Page not found",
-    fatal: true,
   });
 }
 
