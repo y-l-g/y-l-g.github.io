@@ -30,6 +30,6 @@ links:
     variant: "subtle"
 relatedServices:
   - label: "Laravel development"
-    to: "/developpeur-laravel"
+    to: "/en/developpeur-laravel"
   - label: "Laravel code audit"
-    to: "/audit-code-laravel"
+    to: "/en/audit-code-laravel"

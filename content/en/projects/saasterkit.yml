@@ -37,6 +37,6 @@ links:
     variant: "ghost"
 relatedServices:
   - label: "SaaS development"
-    to: "/developpement-saas"
+    to: "/en/developpement-saas"
   - label: "Laravel development"
-    to: "/developpeur-laravel"
+    to: "/en/developpeur-laravel"

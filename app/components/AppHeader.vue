@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
+import { withSiteUrl } from "~/utils/seo";
 
 type ActiveMenuItem = "home" | "services" | "blog";
 
@@ -38,17 +39,17 @@ const activeItem = computed<ActiveMenuItem | undefined>(() => {
 const items = computed<NavigationMenuItem[]>(() => [
   {
     label: t("nav.home"),
-    to: "/",
+    to: landingPath.value,
     active: activeItem.value === "home",
   },
   {
     label: t("nav.services"),
-    to: "/#services",
+    to: `${landingPath.value}#services`,
     active: activeItem.value === "services",
   },
   {
     label: t("nav.blog"),
-    to: "/blog",
+    to: blogPath.value,
     active: activeItem.value === "blog",
   },
 ]);
@@ -57,8 +58,11 @@ const availableLocales = computed(() =>
   (locales.value as LocaleItem[]).filter((item) => item.code !== locale.value),
 );
 
-const getSwitchLocalePath = (code: string) =>
-  switchLocalePath(code as "fr" | "en");
+const getSwitchLocalePath = (code: string) => {
+  const path = switchLocalePath(code as "fr" | "en");
+
+  return code === DEFAULT_LOCALE ? withSiteUrl(path) : path;
+};
 
 const updateActiveLandingItem = () => {
   if (!import.meta.client || !isLandingRoute.value) {

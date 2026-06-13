@@ -30,6 +30,6 @@ links:
     variant: "subtle"
 relatedServices:
   - label: "Vue & Nuxt development"
-    to: "/developpeur-vue-nuxt"
+    to: "/en/developpeur-vue-nuxt"
   - label: "SaaS development"
-    to: "/developpement-saas"
+    to: "/en/developpement-saas"

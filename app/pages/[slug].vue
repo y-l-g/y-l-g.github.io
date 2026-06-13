@@ -49,6 +49,7 @@ const image = computed(() =>
   page.value?.seo?.image ? withSiteUrl(page.value.seo.image) : defaultSeoImage,
 );
 const homePath = computed(() => getLocalizedContentPath("/", locale.value));
+const blogPath = computed(() => getLocalizedContentPath("/blog", locale.value));
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
   { label: t("nav.home"), to: homePath.value },
   { label: page.value?.title || "" },
@@ -134,7 +135,7 @@ useHead(() => ({
           },
           {
             label: page.cta.secondaryLabel || t('nav.blog'),
-            to: '/blog',
+            to: blogPath,
             color: 'neutral',
             variant: 'subtle',
             icon: 'i-lucide-book-open',

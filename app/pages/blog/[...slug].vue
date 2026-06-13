@@ -38,6 +38,7 @@ const canonicalUrl = computed(() => withSiteUrl(route.path));
 const image = computed(() =>
   page.value?.image ? withSiteUrl(page.value.image) : defaultSeoImage,
 );
+const blogPath = computed(() => getLocalizedContentPath("/blog", locale.value));
 
 useSeoMeta({
   title,
@@ -100,7 +101,7 @@ const articleLink = computed(() => canonicalUrl.value);
         root: 'flex flex-col lg:grid lg:grid-cols-10 lg:gap-20',
       }"
     >
-      <ULink to="/blog" class="text-sm flex items-center gap-1 mt-2">
+      <ULink :to="blogPath" class="text-sm flex items-center gap-1 mt-2">
         <UIcon name="lucide:chevron-left" />
         {{ t("blog.back") }}
       </ULink>
