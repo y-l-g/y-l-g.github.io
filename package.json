@@ -13,7 +13,7 @@
     "seo:check": "node scripts/check-seo.mjs"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.106",
+    "@iconify-json/lucide": "^1.2.112",
     "@iconify-json/simple-icons": "^1.2.81",
     "@nuxt/content": "^3.13.0",
     "@nuxt/image": "^2.0.0",
