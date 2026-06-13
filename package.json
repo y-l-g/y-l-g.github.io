@@ -20,7 +20,7 @@
     "@nuxt/ui": "^4.7.1",
     "@nuxtjs/i18n": "^10.3.0",
     "@nuxtjs/sitemap": "^8.0.15",
-    "@takumi-rs/core": "^1.1.2",
+    "@takumi-rs/core": "^1.8.5",
     "@vueuse/nuxt": "^14.3.0",
     "better-sqlite3": "^12.9.0",
     "motion-v": "^2.2.1",
