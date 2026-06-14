@@ -45,6 +45,7 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
   { label: locale.value === DEFAULT_LOCALE ? "Projets" : "Projects", to: homePath.value },
   { label: page.value?.title || "" },
 ]);
+const relatedServiceLinks = computed(() => page.value?.relatedServices || []);
 
 useSeoMeta({
   title,
@@ -155,6 +156,25 @@ useHead(() => ({
               }"
             />
           </div>
+        </div>
+      </UPageSection>
+
+      <UPageSection
+        v-if="relatedServiceLinks.length"
+        :title="locale === DEFAULT_LOCALE ? 'Services liés' : 'Related services'"
+        orientation="vertical"
+        :ui="{ container: 'py-10 sm:py-14 lg:py-16' }"
+      >
+        <div class="flex flex-wrap gap-3">
+          <UButton
+            v-for="link in relatedServiceLinks"
+            :key="link.to"
+            :label="link.label"
+            :to="link.to"
+            color="neutral"
+            variant="subtle"
+            trailing-icon="i-lucide-arrow-right"
+          />
         </div>
       </UPageSection>
     </UPage>
