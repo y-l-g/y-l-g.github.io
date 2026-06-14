@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/sitemap",
     "@vueuse/nuxt",
-    "nuxt-og-image",
     "motion-v/nuxt",
   ],
   site: {
