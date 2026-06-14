@@ -5,6 +5,23 @@ const publicDir = ".output/public";
 const siteUrl = "https://y-l.fr";
 const errors = [];
 const canonicals = new Map();
+const defaultLocaleContentRoutePrefixes = [
+  "/blog",
+  "/projets/",
+  "/developpeur-",
+  "/developpement-saas",
+  "/audit-code-laravel",
+];
+const ignoredEnglishBodyHrefPrefixes = ["http://", "https://", "//", "/en", "/_nuxt/", "/_payload"];
+const ignoredEnglishBodyHrefs = new Set([
+  "/favicon.ico",
+  "/apple-touch-icon.png",
+  "/site.webmanifest",
+]);
+
+const extractBody = (html) => html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] || "";
+const extractHrefValues = (html) =>
+  [...html.matchAll(/\shref="([^"]+)"/g)].map((match) => match[1]);
 
 const walk = (dir) =>
   readdirSync(dir).flatMap((entry) => {
@@ -42,6 +59,19 @@ for (const file of htmlFiles) {
   if (!ogTitle) errors.push(`${label}: missing og:title`);
   if (!ogImage) errors.push(`${label}: missing og:image`);
   if (!jsonLd) errors.push(`${label}: missing JSON-LD`);
+
+  if (label.startsWith("en/")) {
+    const bodyHrefs = extractHrefValues(extractBody(html));
+    const defaultLocaleHrefs = bodyHrefs.filter((href) => {
+      if (ignoredEnglishBodyHrefs.has(href)) return false;
+      if (ignoredEnglishBodyHrefPrefixes.some((prefix) => href.startsWith(prefix))) return false;
+      return defaultLocaleContentRoutePrefixes.some((prefix) => href.startsWith(prefix));
+    });
+
+    for (const href of defaultLocaleHrefs) {
+      errors.push(`${label}: English page links to default-locale route ${href}`);
+    }
+  }
 
   if (canonical) {
     const existing = canonicals.get(canonical);
