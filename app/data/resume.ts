@@ -246,7 +246,7 @@ export const resumeContent: Record<"fr" | "en", ResumeContent> = {
     ],
     education: [
       "Licence de mathématiques, Université Rennes 1, 2013",
-      "Formation d'ingénieur, INSA Rennes, 2009-2011",
+      "Formation d'ingénieur (non terminé), INSA Rennes, 2009-2011",
       "Baccalauréat S, mention très bien, Lycée Charles de Gaulle, Vannes, 2009",
     ],
     languages: [
@@ -401,12 +401,9 @@ export const resumeContent: Record<"fr" | "en", ResumeContent> = {
     ],
     education: [
       "Bachelor's degree in Mathematics, Universite de Rennes 1, 2013",
-      "Engineering studies, INSA Rennes, 2009-2011",
+      "Engineering studies (unfinished), INSA Rennes, 2009-2011",
       "Baccalaureat S, highest honors, Lycee Charles de Gaulle, Vannes, 2009",
     ],
-    languages: [
-      "French: native",
-      "English: professional working proficiency",
-    ],
+    languages: ["French: native", "English: professional working proficiency"],
   },
 };
