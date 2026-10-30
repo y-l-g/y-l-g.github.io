@@ -1,414 +1,426 @@
 <script setup lang="ts">
-import {
-  defaultSeoImage,
-  defaultSeoImageHeight,
-  defaultSeoImageWidth,
-  jsonLdScript,
-  siteName,
-  withSiteUrl,
-} from "~/utils/seo";
-import { resumeContent } from "~/data/resume";
+import { resume } from "~/data/resume";
 
-const { locale } = useI18n();
-const resumeLocale = computed<"fr" | "en">(() =>
-  locale.value === DEFAULT_LOCALE ? "fr" : "en",
-);
-const resume = computed(() => resumeContent[resumeLocale.value]);
-const canonicalPath = computed(() => getLocalizedContentPath("/resume", locale.value));
-const title = computed(() => resume.value.seoTitle);
-const description = computed(() => resume.value.seoDescription);
-const sameAs = computed(() =>
-  resume.value.contactLinks
-    .map((link) => link.href)
-    .filter((href) => href.startsWith("https://")),
-);
-
-const printResume = () => window.print();
-
-useSeoMeta({
-  title,
-  ogTitle: computed(() => `${siteName} - ${title.value}`),
-  description,
-  ogDescription: description,
-  ogType: "profile",
-  ogUrl: computed(() => withSiteUrl(canonicalPath.value)),
-  ogImage: defaultSeoImage,
-  ogImageWidth: defaultSeoImageWidth,
-  ogImageHeight: defaultSeoImageHeight,
-  twitterImage: defaultSeoImage,
+usePageSeo({
+  title: "Resume, Youenn Le Gouedec",
+  description:
+    "Resume of Youenn Le Gouedec, full-stack web developer working with Laravel, Vue, Nuxt, Rust and Go, based in Redon, France.",
+  path: "/resume",
+  type: "profile",
+  jsonLd: {
+    "@type": "ProfilePage",
+    url: `${siteUrl}/resume`,
+    mainEntity: {
+      "@type": "Person",
+      name: siteName,
+      jobTitle: resume.role,
+      email: "mailto:youenn.legouedec@gmail.com",
+      image: portrait,
+      url: siteUrl,
+      sameAs: resume.contact
+        .map((link) => link.href)
+        .filter((href) => href.startsWith("https://") && href !== siteUrl),
+    },
+  },
 });
 
-useHead(() => ({
-  script: [
-    jsonLdScript({
-      "@context": "https://schema.org",
-      "@type": "ProfilePage",
-      name: resume.value.jsonLdName,
-      url: withSiteUrl(canonicalPath.value),
-      description: description.value,
-      mainEntity: {
-        "@type": "Person",
-        name: siteName,
-        jobTitle: resume.value.jsonLdJobTitle,
-        email: "mailto:youenn.legouedec@gmail.com",
-        telephone: "+33619465867",
-        image: defaultSeoImage,
-        url: withSiteUrl("/"),
-        sameAs: sameAs.value,
-      },
-    }),
-  ],
-}));
+const print = () => window.print();
 </script>
 
 <template>
-  <main
-    class="resume-page min-h-screen bg-muted py-6 text-default print:bg-white print:py-0"
-  >
-    <div
-      class="mx-auto flex w-full max-w-5xl justify-end px-4 pb-4 print:hidden"
-    >
-      <UButton
-        color="neutral"
-        variant="outline"
-        icon="i-lucide-printer"
-        :label="resume.printLabel"
-        @click="printResume"
-      />
+  <div class="resume">
+    <div class="toolbar">
+      <NuxtLink to="/">y-l.fr</NuxtLink>
+      <button type="button" @click="print">Print or save as PDF</button>
     </div>
 
-    <article
-      class="resume-sheet mx-auto w-full max-w-5xl bg-default px-6 py-7 shadow-sm ring ring-default sm:px-8 lg:px-10 print:max-w-none print:p-0 print:shadow-none print:ring-0"
-    >
-      <header
-        class="resume-header grid gap-5 border-b border-muted pb-5 sm:grid-cols-[1fr_auto]"
-      >
+    <article class="sheet">
+      <header class="head">
         <div>
-          <p class="text-sm font-medium text-primary">
-            {{ resume.role }}
-          </p>
-          <h1
-            class="mt-1 text-3xl font-semibold tracking-normal text-highlighted"
-          >
-            {{ resume.name }}
-          </h1>
-          <p class="mt-3 max-w-3xl text-sm leading-6 text-toned">
-            {{ resume.summary }}
-          </p>
+          <p class="role">{{ resume.role }}</p>
+          <h1>{{ resume.name }}</h1>
+          <p class="summary">{{ resume.summary }}</p>
         </div>
-
-        <div class="flex items-start gap-4 sm:flex-col sm:items-end">
-          <NuxtImg
-            src="/8fdc0794-1657-4f9e-913e-c8997e5cddb2.webp"
-            :alt="resume.portraitAlt"
-            width="112"
-            height="112"
-            class="size-24 rounded-lg object-cover ring ring-default sm:size-28 print:size-24"
-          />
-          <div class="flex items-center gap-1 text-sm text-toned">
-            <ResumeIcon name="map-pin" class="size-4 text-primary" />
-            <span>{{ resume.location }}</span>
-          </div>
-        </div>
+        <img
+          src="/portrait.webp"
+          alt="Painted portrait of Youenn Le Gouedec"
+          width="112"
+          height="112"
+        >
       </header>
 
-      <section
-        :aria-label="resume.contactAriaLabel"
-        class="resume-contact grid gap-2 border-b border-muted py-4 text-sm sm:grid-cols-2 lg:grid-cols-3"
-      >
-        <a
-          v-for="link in resume.contactLinks"
-          :key="link.href"
-          :href="link.href"
-          class="flex min-w-0 items-center gap-2 text-toned transition-colors hover:text-default"
-          rel="noopener noreferrer"
-        >
-          <ResumeIcon
-            v-if="link.icon"
-            :name="link.icon"
-            class="size-4 shrink-0 text-primary"
-            :class="link.iconClass"
-          />
-          <span class="truncate">{{ link.label }}</span>
-        </a>
-      </section>
+      <ul class="contact" aria-label="Contact">
+        <li>{{ resume.location }}</li>
+        <li v-for="link in resume.contact" :key="link.href">
+          <a :href="link.href" rel="noopener">{{ link.label }}</a>
+        </li>
+      </ul>
 
-      <div class="resume-body grid gap-6 pt-5 lg:grid-cols-[1fr_2fr]">
-        <aside class="resume-sidebar space-y-6">
+      <div class="body">
+        <aside>
           <section>
-            <h2 class="resume-section-title">
-              {{ resume.sectionTitles.skills }}
-            </h2>
-            <div class="mt-3 space-y-4">
-              <div v-for="group in resume.skillGroups" :key="group.title">
-                <h3 class="text-sm font-semibold text-highlighted">
-                  {{ group.title }}
-                </h3>
-                <div class="mt-2 flex flex-wrap gap-1.5">
-                  <UBadge
-                    v-for="item in group.items"
-                    :key="item"
-                    color="neutral"
-                    variant="subtle"
-                    size="sm"
-                    class="resume-skill-badge rounded-md"
-                  >
-                    {{ item }}
-                  </UBadge>
-                </div>
-              </div>
+            <h2>Skills</h2>
+            <div v-for="group in resume.skills" :key="group.title" class="group">
+              <h3>{{ group.title }}</h3>
+              <p>{{ group.items.join(", ") }}</p>
             </div>
           </section>
 
           <section>
-            <h2 class="resume-section-title">
-              {{ resume.sectionTitles.education }}
-            </h2>
-            <ul class="mt-3 space-y-2 text-sm leading-5 text-toned">
-              <li v-for="item in resume.education" :key="item">
-                {{ item }}
-              </li>
+            <h2>Open source</h2>
+            <p>Merged fixes in {{ resume.upstream }}.</p>
+          </section>
+
+          <section>
+            <h2>Education</h2>
+            <ul class="plain">
+              <li v-for="item in resume.education" :key="item">{{ item }}</li>
             </ul>
           </section>
 
           <section>
-            <h2 class="resume-section-title">
-              {{ resume.sectionTitles.languages }}
-            </h2>
-            <ul class="mt-3 space-y-2 text-sm leading-5 text-toned">
-              <li v-for="item in resume.languages" :key="item">
-                {{ item }}
-              </li>
+            <h2>Languages</h2>
+            <ul class="plain">
+              <li v-for="item in resume.languages" :key="item">{{ item }}</li>
             </ul>
           </section>
         </aside>
 
-        <div class="resume-main space-y-6">
+        <div class="main">
           <section>
-            <h2 class="resume-section-title">
-              {{ resume.sectionTitles.experience }}
-            </h2>
-            <div class="mt-3 space-y-4">
-              <article
-                v-for="experience in resume.experiences"
-                :key="`${experience.company}-${experience.role}`"
-                class="break-inside-avoid"
-              >
-                <div
-                  class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1"
-                >
-                  <div>
-                    <h3 class="text-base font-semibold text-highlighted">
-                      {{ experience.role }}
-                    </h3>
-                    <p class="text-sm font-medium text-primary">
-                      {{ experience.company }}
-                    </p>
-                  </div>
-                  <p class="text-sm text-muted">
-                    {{ experience.period }}
-                  </p>
-                </div>
-                <p v-if="experience.location" class="mt-1 text-sm text-muted">
-                  {{ experience.location }}
-                </p>
-                <ul class="resume-list mt-2">
-                  <li v-for="bullet in experience.bullets" :key="bullet">
-                    {{ bullet }}
-                  </li>
-                </ul>
-              </article>
-            </div>
+            <h2>Experience</h2>
+            <article
+              v-for="job in resume.experiences"
+              :key="job.company + job.role"
+              class="job"
+            >
+              <div class="job-head">
+                <h3>{{ job.role }}</h3>
+                <p class="period">{{ job.period }}</p>
+              </div>
+              <p class="where">{{ job.company }}, {{ job.location }}</p>
+              <ul class="bullets">
+                <li v-for="bullet in job.bullets" :key="bullet">{{ bullet }}</li>
+              </ul>
+            </article>
           </section>
 
           <section>
-            <h2 class="resume-section-title">
-              {{ resume.sectionTitles.projects }}
-            </h2>
-            <div class="resume-projects mt-3 grid gap-3 sm:grid-cols-2">
-              <article
-                v-for="project in resume.projects"
-                :key="project.name"
-                class="resume-project-card break-inside-avoid rounded-lg border border-muted p-3"
-              >
-                <div class="flex items-start justify-between gap-2">
-                  <h3 class="text-sm font-semibold text-highlighted">
-                    {{ project.name }}
-                  </h3>
-                  <a
-                    v-if="project.href"
-                    :href="project.href"
-                    class="mt-0.5 text-primary"
-                    :aria-label="`${resume.openProjectLabel} ${project.name}`"
-                    rel="noopener noreferrer"
-                  >
-                    <ResumeIcon name="external-link" class="size-4" />
-                  </a>
-                </div>
-                <p class="mt-1 text-sm leading-5 text-toned">
-                  {{ project.description }}
-                </p>
-                <p class="mt-2 text-xs font-medium uppercase text-muted">
-                  {{ project.stack }}
-                </p>
+            <h2>Selected projects</h2>
+            <div class="projects">
+              <article v-for="project in resume.projects" :key="project.name">
+                <h3>
+                  <a :href="project.href" rel="noopener">{{ project.name }}</a>
+                </h3>
+                <p>{{ project.description }}</p>
+                <p class="stack">{{ project.stack }}</p>
               </article>
             </div>
           </section>
         </div>
       </div>
     </article>
-  </main>
+  </div>
 </template>
 
 <style scoped>
-.resume-section-title {
-  color: var(--ui-text-highlighted);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
+.resume {
+  padding: 1rem 1rem 4rem;
 }
 
-.resume-list {
-  color: var(--ui-text-toned);
-  display: grid;
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 56rem;
+  margin: 0 auto 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.toolbar a {
+  text-decoration: none;
+}
+
+.toolbar a::before {
+  content: "\2190";
+  margin-right: 0.4em;
+}
+
+.toolbar button {
+  font: inherit;
+  color: var(--paper);
+  background: var(--ink);
+  border: 0;
+  border-radius: 2px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: var(--accent);
+}
+
+.sheet {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem;
+  border: 1px solid var(--rule);
   font-size: 0.875rem;
-  gap: 0.25rem;
-  line-height: 1.45;
-  list-style: disc;
-  padding-left: 1.1rem;
+  line-height: 1.5;
 }
 
-.resume-svg-icon {
-  display: inline-block;
-  flex: 0 0 auto;
-  height: 1rem;
-  width: 1rem;
+.head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--ink);
 }
 
-.resume-icon-malt {
-  height: 1.75rem;
-  margin-left: -0.35rem;
-  margin-right: -0.15rem;
-  width: 1.75rem;
+.head img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+}
+
+.role,
+h2,
+.period,
+.stack,
+.contact {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+}
+
+.role {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+h1 {
+  margin-top: 0.35rem;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.summary {
+  margin-top: 0.85rem;
+  max-width: 40rem;
+  color: var(--ink-2);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.25rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-2);
+}
+
+.contact a {
+  text-decoration: none;
+}
+
+.contact a:hover {
+  color: var(--accent);
+}
+
+.body {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 1.25rem;
+}
+
+section + section {
+  margin-top: 1.4rem;
+}
+
+h2 {
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+
+h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.group + .group {
+  margin-top: 0.6rem;
+}
+
+.group p,
+aside p,
+.plain {
+  color: var(--ink-2);
+}
+
+.plain li + li {
+  margin-top: 0.3rem;
+}
+
+.job + .job {
+  margin-top: 1rem;
+}
+
+.job-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.period {
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.where {
+  color: var(--accent);
+}
+
+.bullets {
+  margin-top: 0.35rem;
+  color: var(--ink-2);
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 0.9rem;
+}
+
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.35rem;
+  height: 1px;
+  background: var(--ink-3);
+}
+
+.projects {
+  display: grid;
+  gap: 0.9rem 1.5rem;
+}
+
+.projects article {
+  break-inside: avoid;
+}
+
+.projects a {
+  text-decoration: none;
+}
+
+.projects a::after {
+  content: "\2197";
+  margin-left: 0.3em;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.projects a:hover {
+  color: var(--accent);
+}
+
+.projects p {
+  color: var(--ink-2);
+}
+
+.projects .stack {
+  margin-top: 0.15rem;
+  color: var(--ink-3);
+}
+
+@media (min-width: 720px) {
+  .resume {
+    padding-top: 2rem;
+  }
+
+  .sheet {
+    padding: 2.5rem 2.75rem;
+  }
+
+  .head img {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .body {
+    grid-template-columns: 14rem 1fr;
+    gap: 2.25rem;
+  }
+
+  .projects {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media print {
   @page {
-    margin: 10mm;
     size: A4;
+    margin: 11mm;
   }
 
-  :global(html) {
-    font-size: 12px;
+  :global(:root) {
+    --paper: #fff;
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #6b6b6b;
+    --rule: #d6d6d6;
+    --accent: #9a4a1b;
   }
 
-  :global(body),
-  :global(#__nuxt) {
-    background: #ffffff !important;
-  }
-
-  .resume-page {
-    --ui-bg: #ffffff;
-    --ui-bg-muted: #ffffff;
-    --ui-border: #d4d4d8;
-    --ui-border-muted: #e4e4e7;
-    --ui-primary: #c2410c;
-    --ui-text: #18181b;
-    --ui-text-highlighted: #09090b;
-    --ui-text-muted: #71717a;
-    --ui-text-toned: #3f3f46;
-
-    background: #ffffff !important;
-    color: #18181b;
-    min-height: auto;
-    padding: 0 !important;
+  :global(body) {
+    background: #fff;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
 
-  .resume-sheet {
-    background: #ffffff !important;
-    box-shadow: none !important;
-    color: #18181b;
-    font-size: 1rem;
-    max-width: none !important;
-    padding: 0 !important;
-    width: 100%;
+  .resume {
+    padding: 0;
   }
 
-  .resume-header {
-    display: grid;
-    gap: 0.9rem !important;
-    grid-template-columns: minmax(0, 1fr) auto !important;
-    padding-bottom: 0.75rem !important;
+  .toolbar {
+    display: none;
   }
 
-  .resume-contact {
-    display: grid;
-    gap: 0.4rem 0.75rem !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    padding-bottom: 0.7rem !important;
-    padding-top: 0.7rem !important;
+  .sheet {
+    max-width: none;
+    padding: 0;
+    border: 0;
+    font-size: 8.6pt;
   }
 
-  .resume-body {
-    align-items: start;
-    display: grid;
-    gap: 1.2rem !important;
-    grid-template-columns: minmax(0, 0.86fr) minmax(0, 2fr) !important;
-    padding-top: 0.85rem !important;
+  h1 {
+    font-size: 26pt;
   }
 
-  .resume-sidebar,
-  .resume-main {
-    display: grid;
-    gap: 1rem !important;
+  .head img {
+    width: 24mm;
+    height: 24mm;
   }
 
-  .resume-sidebar > :not(:last-child),
-  .resume-main > :not(:last-child) {
-    margin-bottom: 0 !important;
+  .body {
+    grid-template-columns: 50mm 1fr;
+    gap: 7mm;
   }
 
-  .resume-projects {
-    display: grid;
-    gap: 0.55rem !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    padding-right: 0.1rem !important;
+  .projects {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .resume-project-card {
-    border-color: transparent !important;
-    border-radius: 0.45rem !important;
-    box-shadow: inset 0 0 0 1px #d4d4d8 !important;
-    padding: 0.6rem !important;
-  }
-
-  .resume-skill-badge {
-    background: #f4f4f5 !important;
-    border: 1px solid #d4d4d8 !important;
-    box-shadow: none !important;
-    color: #27272a !important;
-  }
-
-  .resume-section-title {
-    color: #09090b;
-  }
-
-  .resume-list {
-    color: #3f3f46;
-  }
-
-  .resume-svg-icon {
-    color: currentColor;
-    height: 1rem;
-    width: 1rem;
-  }
-
-  .resume-icon-malt {
-    height: 1.75rem;
-    width: 1.75rem;
+  .projects a::after {
+    content: none;
   }
 }
 </style>
