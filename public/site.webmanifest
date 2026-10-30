@@ -1,13 +1,13 @@
 {
   "name": "Youenn Le Gouedec",
   "short_name": "YLG",
-  "description": "Développeur web full-stack freelance en France.",
-  "lang": "fr-FR",
+  "description": "Full-stack developer in Redon, France.",
+  "lang": "en",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#f2eee6",
+  "theme_color": "#f2eee6",
   "icons": [
     {
       "src": "/apple-touch-icon.png",
