@@ -100,7 +100,7 @@ export const projects: Project[] = [
     ],
     links: [
       { label: "y-l-g/saasterkit", href: "https://github.com/y-l-g/saasterkit" },
-      { label: "saasterkit.com", href: "https://saasterkit.com" },
+      { label: "saasterkit.y-l.fr", href: "https://saasterkit.y-l.fr" },
     ],
   },
 ];
