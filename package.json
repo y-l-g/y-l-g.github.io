@@ -13,7 +13,7 @@
     "seo:check": "node scripts/check-seo.mjs"
   },
   "dependencies": {
-    "nuxt": "^4.4.5"
+    "nuxt": "^4.6.3"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.15.2",
